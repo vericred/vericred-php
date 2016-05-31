@@ -72,6 +72,7 @@ class Provider implements ArrayAccess
         'latitude' => 'float',
         'longitude' => 'float',
         'middle_name' => 'string',
+        'network_ids' => 'int[]',
         'personal_phone' => 'string',
         'phone' => 'string',
         'presentation_name' => 'string',
@@ -110,6 +111,7 @@ class Provider implements ArrayAccess
         'latitude' => 'latitude',
         'longitude' => 'longitude',
         'middle_name' => 'middle_name',
+        'network_ids' => 'network_ids',
         'personal_phone' => 'personal_phone',
         'phone' => 'phone',
         'presentation_name' => 'presentation_name',
@@ -148,6 +150,7 @@ class Provider implements ArrayAccess
         'latitude' => 'setLatitude',
         'longitude' => 'setLongitude',
         'middle_name' => 'setMiddleName',
+        'network_ids' => 'setNetworkIds',
         'personal_phone' => 'setPersonalPhone',
         'phone' => 'setPhone',
         'presentation_name' => 'setPresentationName',
@@ -186,6 +189,7 @@ class Provider implements ArrayAccess
         'latitude' => 'getLatitude',
         'longitude' => 'getLongitude',
         'middle_name' => 'getMiddleName',
+        'network_ids' => 'getNetworkIds',
         'personal_phone' => 'getPersonalPhone',
         'phone' => 'getPhone',
         'presentation_name' => 'getPresentationName',
@@ -280,6 +284,11 @@ class Provider implements ArrayAccess
       */
     protected $middle_name;
     /**
+      * $network_ids Array of network ids
+      * @var int[]
+      */
+    protected $network_ids;
+    /**
       * $personal_phone Personal contact phone for the provider.
       * @var string
       */
@@ -364,6 +373,7 @@ class Provider implements ArrayAccess
             $this->latitude = $data["latitude"];
             $this->longitude = $data["longitude"];
             $this->middle_name = $data["middle_name"];
+            $this->network_ids = $data["network_ids"];
             $this->personal_phone = $data["personal_phone"];
             $this->phone = $data["phone"];
             $this->presentation_name = $data["presentation_name"];
@@ -676,6 +686,26 @@ class Provider implements ArrayAccess
     {
         
         $this->middle_name = $middle_name;
+        return $this;
+    }
+    /**
+     * Gets network_ids
+     * @return int[]
+     */
+    public function getNetworkIds()
+    {
+        return $this->network_ids;
+    }
+  
+    /**
+     * Sets network_ids
+     * @param int[] $network_ids Array of network ids
+     * @return $this
+     */
+    public function setNetworkIds($network_ids)
+    {
+        
+        $this->network_ids = $network_ids;
         return $this;
     }
     /**

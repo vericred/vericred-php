@@ -1,6 +1,6 @@
 <?php
 /**
- * ProvidersSearchResponse
+ * NetworkSearchResponse
  *
  * PHP version 5
  *
@@ -35,7 +35,7 @@ namespace Swagger\Client\Model;
 
 use \ArrayAccess;
 /**
- * ProvidersSearchResponse Class Doc Comment
+ * NetworkSearchResponse Class Doc Comment
  *
  * @category    Class
  * @description 
@@ -44,13 +44,13 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class ProvidersSearchResponse implements ArrayAccess
+class NetworkSearchResponse implements ArrayAccess
 {
     /**
       * The original name of the model.
       * @var string
       */
-    static $swaggerModelName = 'ProvidersSearchResponse';
+    static $swaggerModelName = 'NetworkSearchResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization 
@@ -58,8 +58,7 @@ class ProvidersSearchResponse implements ArrayAccess
       */
     static $swaggerTypes = array(
         'meta' => '\Swagger\Client\Model\Meta',
-        'providers' => '\Swagger\Client\Model\Provider[]',
-        'states' => '\Swagger\Client\Model\State[]'
+        'networks' => '\Swagger\Client\Model\Network[]'
     );
   
     static function swaggerTypes() {
@@ -72,8 +71,7 @@ class ProvidersSearchResponse implements ArrayAccess
       */
     static $attributeMap = array(
         'meta' => 'meta',
-        'providers' => 'providers',
-        'states' => 'states'
+        'networks' => 'networks'
     );
   
     static function attributeMap() {
@@ -86,8 +84,7 @@ class ProvidersSearchResponse implements ArrayAccess
       */
     static $setters = array(
         'meta' => 'setMeta',
-        'providers' => 'setProviders',
-        'states' => 'setStates'
+        'networks' => 'setNetworks'
     );
   
     static function setters() {
@@ -100,8 +97,7 @@ class ProvidersSearchResponse implements ArrayAccess
       */
     static $getters = array(
         'meta' => 'getMeta',
-        'providers' => 'getProviders',
-        'states' => 'getStates'
+        'networks' => 'getNetworks'
     );
   
     static function getters() {
@@ -114,15 +110,10 @@ class ProvidersSearchResponse implements ArrayAccess
       */
     protected $meta;
     /**
-      * $providers Providers that fit the requested criterion.
-      * @var \Swagger\Client\Model\Provider[]
+      * $networks Networks that fit the requested criterion.
+      * @var \Swagger\Client\Model\Network[]
       */
-    protected $providers;
-    /**
-      * $states States that fit the requested criterion.
-      * @var \Swagger\Client\Model\State[]
-      */
-    protected $states;
+    protected $networks;
 
     /**
      * Constructor
@@ -134,8 +125,7 @@ class ProvidersSearchResponse implements ArrayAccess
         
         if ($data != null) {
             $this->meta = $data["meta"];
-            $this->providers = $data["providers"];
-            $this->states = $data["states"];
+            $this->networks = $data["networks"];
         }
     }
     /**
@@ -159,43 +149,23 @@ class ProvidersSearchResponse implements ArrayAccess
         return $this;
     }
     /**
-     * Gets providers
-     * @return \Swagger\Client\Model\Provider[]
+     * Gets networks
+     * @return \Swagger\Client\Model\Network[]
      */
-    public function getProviders()
+    public function getNetworks()
     {
-        return $this->providers;
+        return $this->networks;
     }
   
     /**
-     * Sets providers
-     * @param \Swagger\Client\Model\Provider[] $providers Providers that fit the requested criterion.
+     * Sets networks
+     * @param \Swagger\Client\Model\Network[] $networks Networks that fit the requested criterion.
      * @return $this
      */
-    public function setProviders($providers)
+    public function setNetworks($networks)
     {
         
-        $this->providers = $providers;
-        return $this;
-    }
-    /**
-     * Gets states
-     * @return \Swagger\Client\Model\State[]
-     */
-    public function getStates()
-    {
-        return $this->states;
-    }
-  
-    /**
-     * Sets states
-     * @param \Swagger\Client\Model\State[] $states States that fit the requested criterion.
-     * @return $this
-     */
-    public function setStates($states)
-    {
-        
-        $this->states = $states;
+        $this->networks = $networks;
         return $this;
     }
     /**

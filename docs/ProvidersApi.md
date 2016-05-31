@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **getProvider**
-> \Swagger\Client\Model\ProviderResponse getProvider($npi, $vericred_api_key)
+> \Swagger\Client\Model\Provider getProvider($npi, $vericred_api_key)
 
 Find a Provider
 
@@ -42,7 +42,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\ProviderResponse**](ProviderResponse.md)
+[**\Swagger\Client\Model\Provider**](Provider.md)
 
 ### Authorization
 

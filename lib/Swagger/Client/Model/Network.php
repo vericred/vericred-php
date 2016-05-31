@@ -1,6 +1,6 @@
 <?php
 /**
- * ProvidersSearchResponse
+ * Network
  *
  * PHP version 5
  *
@@ -35,7 +35,7 @@ namespace Swagger\Client\Model;
 
 use \ArrayAccess;
 /**
- * ProvidersSearchResponse Class Doc Comment
+ * Network Class Doc Comment
  *
  * @category    Class
  * @description 
@@ -44,22 +44,21 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class ProvidersSearchResponse implements ArrayAccess
+class Network implements ArrayAccess
 {
     /**
       * The original name of the model.
       * @var string
       */
-    static $swaggerModelName = 'ProvidersSearchResponse';
+    static $swaggerModelName = 'Network';
 
     /**
       * Array of property to type mappings. Used for (de)serialization 
       * @var string[]
       */
     static $swaggerTypes = array(
-        'meta' => '\Swagger\Client\Model\Meta',
-        'providers' => '\Swagger\Client\Model\Provider[]',
-        'states' => '\Swagger\Client\Model\State[]'
+        'id' => 'int',
+        'name' => 'string'
     );
   
     static function swaggerTypes() {
@@ -71,9 +70,8 @@ class ProvidersSearchResponse implements ArrayAccess
       * @var string[] 
       */
     static $attributeMap = array(
-        'meta' => 'meta',
-        'providers' => 'providers',
-        'states' => 'states'
+        'id' => 'id',
+        'name' => 'name'
     );
   
     static function attributeMap() {
@@ -85,9 +83,8 @@ class ProvidersSearchResponse implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'meta' => 'setMeta',
-        'providers' => 'setProviders',
-        'states' => 'setStates'
+        'id' => 'setId',
+        'name' => 'setName'
     );
   
     static function setters() {
@@ -99,9 +96,8 @@ class ProvidersSearchResponse implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'meta' => 'getMeta',
-        'providers' => 'getProviders',
-        'states' => 'getStates'
+        'id' => 'getId',
+        'name' => 'getName'
     );
   
     static function getters() {
@@ -109,20 +105,15 @@ class ProvidersSearchResponse implements ArrayAccess
     }
 
     /**
-      * $meta Metadata for query
-      * @var \Swagger\Client\Model\Meta
+      * $id Primary key
+      * @var int
       */
-    protected $meta;
+    protected $id;
     /**
-      * $providers Providers that fit the requested criterion.
-      * @var \Swagger\Client\Model\Provider[]
+      * $name Carrier name
+      * @var string
       */
-    protected $providers;
-    /**
-      * $states States that fit the requested criterion.
-      * @var \Swagger\Client\Model\State[]
-      */
-    protected $states;
+    protected $name;
 
     /**
      * Constructor
@@ -133,69 +124,48 @@ class ProvidersSearchResponse implements ArrayAccess
         
         
         if ($data != null) {
-            $this->meta = $data["meta"];
-            $this->providers = $data["providers"];
-            $this->states = $data["states"];
+            $this->id = $data["id"];
+            $this->name = $data["name"];
         }
     }
     /**
-     * Gets meta
-     * @return \Swagger\Client\Model\Meta
+     * Gets id
+     * @return int
      */
-    public function getMeta()
+    public function getId()
     {
-        return $this->meta;
+        return $this->id;
     }
   
     /**
-     * Sets meta
-     * @param \Swagger\Client\Model\Meta $meta Metadata for query
+     * Sets id
+     * @param int $id Primary key
      * @return $this
      */
-    public function setMeta($meta)
+    public function setId($id)
     {
         
-        $this->meta = $meta;
+        $this->id = $id;
         return $this;
     }
     /**
-     * Gets providers
-     * @return \Swagger\Client\Model\Provider[]
+     * Gets name
+     * @return string
      */
-    public function getProviders()
+    public function getName()
     {
-        return $this->providers;
+        return $this->name;
     }
   
     /**
-     * Sets providers
-     * @param \Swagger\Client\Model\Provider[] $providers Providers that fit the requested criterion.
+     * Sets name
+     * @param string $name Carrier name
      * @return $this
      */
-    public function setProviders($providers)
+    public function setName($name)
     {
         
-        $this->providers = $providers;
-        return $this;
-    }
-    /**
-     * Gets states
-     * @return \Swagger\Client\Model\State[]
-     */
-    public function getStates()
-    {
-        return $this->states;
-    }
-  
-    /**
-     * Sets states
-     * @param \Swagger\Client\Model\State[] $states States that fit the requested criterion.
-     * @return $this
-     */
-    public function setStates($states)
-    {
-        
-        $this->states = $states;
+        $this->name = $name;
         return $this;
     }
     /**
