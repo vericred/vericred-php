@@ -97,7 +97,7 @@ class ProvidersApi
      *
      * @param string $npi NPI number (required)
      * @param string $vericred_api_key API Key (optional)
-     * @return \Swagger\Client\Model\Provider
+     * @return \Swagger\Client\Model\ProviderShowResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
     public function getProvider($npi, $vericred_api_key = null)
@@ -114,7 +114,7 @@ class ProvidersApi
      *
      * @param string $npi NPI number (required)
      * @param string $vericred_api_key API Key (optional)
-     * @return Array of \Swagger\Client\Model\Provider, HTTP status code, HTTP response headers (array of strings)
+     * @return Array of \Swagger\Client\Model\ProviderShowResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
     public function getProviderWithHttpInfo($npi, $vericred_api_key = null)
@@ -167,17 +167,17 @@ class ProvidersApi
             list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
                 $resourcePath, 'GET',
                 $queryParams, $httpBody,
-                $headerParams, '\Swagger\Client\Model\Provider'
+                $headerParams, '\Swagger\Client\Model\ProviderShowResponse'
             );
             if (!$response) {
                 return array(null, $statusCode, $httpHeader);
             }
 
-            return array($this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\Provider', $httpHeader), $statusCode, $httpHeader);
+            return array($this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\ProviderShowResponse', $httpHeader), $statusCode, $httpHeader);
                     } catch (ApiException $e) {
             switch ($e->getCode()) { 
             case 200:
-                $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\Provider', $e->getResponseHeaders());
+                $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\ProviderShowResponse', $e->getResponseHeaders());
                 $e->setResponseObject($data);
                 break;
             }
