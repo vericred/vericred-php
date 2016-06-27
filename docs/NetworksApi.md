@@ -8,24 +8,31 @@ Method | HTTP request | Description
 
 
 # **listNetworks**
-> \Swagger\Client\Model\NetworkSearchResponse listNetworks($carrier_id)
+> \Swagger\Client\Model\NetworkSearchResponse listNetworks($carrier_id, $page, $per_page)
 
 Networks
 
 A network is a list of the doctors, other health care providers,
 and hospitals that a plan has contracted with to provide medical care to
-its members.
+its members. This endpoint is paginated.
 
 ### Example 
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
+// Configure API key authorization: Vericred-Api-Key
+Vericred\Client\Configuration::getDefaultConfiguration()->setApiKey('Vericred-Api-Key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. BEARER) for API key, if needed
+// Vericred\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Vericred-Api-Key', 'BEARER');
+
 $api_instance = new Vericred\Client\Api\NetworksApi();
 $carrier_id = "33333"; // string | Carrier HIOS Issuer ID
+$page = 1; // int | Page of paginated response
+$per_page = 1; // int | Responses per page
 
 try { 
-    $result = $api_instance->listNetworks($carrier_id);
+    $result = $api_instance->listNetworks($carrier_id, $page, $per_page);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling NetworksApi->listNetworks: ', $e->getMessage(), "\n";
@@ -38,6 +45,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **carrier_id** | **string**| Carrier HIOS Issuer ID | 
+ **page** | **int**| Page of paginated response | [optional] 
+ **per_page** | **int**| Responses per page | [optional] 
 
 ### Return type
 
@@ -45,7 +54,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Vericred-Api-Key](../README.md#Vericred-Api-Key)
 
 ### HTTP request headers
 

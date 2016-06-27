@@ -57,7 +57,6 @@ class PlanCounty implements ArrayAccess
       * @var string[]
       */
     static $swaggerTypes = array(
-        'id' => 'int',
         'plan_id' => 'int',
         'county_id' => 'int'
     );
@@ -71,7 +70,6 @@ class PlanCounty implements ArrayAccess
       * @var string[] 
       */
     static $attributeMap = array(
-        'id' => 'id',
         'plan_id' => 'plan_id',
         'county_id' => 'county_id'
     );
@@ -85,7 +83,6 @@ class PlanCounty implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'id' => 'setId',
         'plan_id' => 'setPlanId',
         'county_id' => 'setCountyId'
     );
@@ -99,7 +96,6 @@ class PlanCounty implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'id' => 'getId',
         'plan_id' => 'getPlanId',
         'county_id' => 'getCountyId'
     );
@@ -108,11 +104,6 @@ class PlanCounty implements ArrayAccess
         return self::$getters;
     }
 
-    /**
-      * $id Primary key
-      * @var int
-      */
-    protected $id;
     /**
       * $plan_id Foreign key to plan
       * @var int
@@ -133,30 +124,9 @@ class PlanCounty implements ArrayAccess
         
         
         if ($data != null) {
-            $this->id = $data["id"];
             $this->plan_id = $data["plan_id"];
             $this->county_id = $data["county_id"];
         }
-    }
-    /**
-     * Gets id
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-  
-    /**
-     * Sets id
-     * @param int $id Primary key
-     * @return $this
-     */
-    public function setId($id)
-    {
-        
-        $this->id = $id;
-        return $this;
     }
     /**
      * Gets plan_id

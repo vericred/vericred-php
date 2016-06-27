@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **getDrugCoverages**
-> \Swagger\Client\Model\DrugCoverageResponse getDrugCoverages($ndc_package_code, $audience, $state_code, $vericred_api_key)
+> \Swagger\Client\Model\DrugCoverageResponse getDrugCoverages($ndc_package_code, $audience, $state_code)
 
 Search for DrugCoverages
 
@@ -22,14 +22,18 @@ returns all DrugCoverages for a given Drug
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
+// Configure API key authorization: Vericred-Api-Key
+Vericred\Client\Configuration::getDefaultConfiguration()->setApiKey('Vericred-Api-Key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. BEARER) for API key, if needed
+// Vericred\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Vericred-Api-Key', 'BEARER');
+
 $api_instance = new Vericred\Client\Api\DrugsApi();
 $ndc_package_code = "12345-4321-11"; // string | NDC package code
 $audience = "individual"; // string | Two-character state code
 $state_code = "NY"; // string | Two-character state code
-$vericred_api_key = "api-doc-key"; // string | API Key
 
 try { 
-    $result = $api_instance->getDrugCoverages($ndc_package_code, $audience, $state_code, $vericred_api_key);
+    $result = $api_instance->getDrugCoverages($ndc_package_code, $audience, $state_code);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DrugsApi->getDrugCoverages: ', $e->getMessage(), "\n";
@@ -44,7 +48,6 @@ Name | Type | Description  | Notes
  **ndc_package_code** | **string**| NDC package code | 
  **audience** | **string**| Two-character state code | 
  **state_code** | **string**| Two-character state code | 
- **vericred_api_key** | **string**| API Key | [optional] 
 
 ### Return type
 
@@ -52,7 +55,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Vericred-Api-Key](../README.md#Vericred-Api-Key)
 
 ### HTTP request headers
 
@@ -62,7 +65,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **listDrugs**
-> \Swagger\Client\Model\DrugSearchResponse listDrugs($search_term, $vericred_api_key)
+> \Swagger\Client\Model\DrugSearchResponse listDrugs($search_term)
 
 Drug Search
 
@@ -73,12 +76,16 @@ Search for drugs by proprietary name
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
+// Configure API key authorization: Vericred-Api-Key
+Vericred\Client\Configuration::getDefaultConfiguration()->setApiKey('Vericred-Api-Key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. BEARER) for API key, if needed
+// Vericred\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Vericred-Api-Key', 'BEARER');
+
 $api_instance = new Vericred\Client\Api\DrugsApi();
 $search_term = "Zyrtec"; // string | Full or partial proprietary name of drug
-$vericred_api_key = "api-doc-key"; // string | API Key
 
 try { 
-    $result = $api_instance->listDrugs($search_term, $vericred_api_key);
+    $result = $api_instance->listDrugs($search_term);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling DrugsApi->listDrugs: ', $e->getMessage(), "\n";
@@ -91,7 +98,6 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **search_term** | **string**| Full or partial proprietary name of drug | 
- **vericred_api_key** | **string**| API Key | [optional] 
 
 ### Return type
 
@@ -99,7 +105,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Vericred-Api-Key](../README.md#Vericred-Api-Key)
 
 ### HTTP request headers
 

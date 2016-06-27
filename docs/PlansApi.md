@@ -16,7 +16,7 @@ Find Plans
 
 Searching for a set of plans requires a `zip_code` and `fips_code`
 code.  These are used to determine pricing and availabity
-of health plans.
+of health plans. This endpoint is paginated.
 
 Optionally, you may provide a list of Applicants or Providers
 
@@ -74,10 +74,23 @@ and return it for each plan.  If no values are provided, the
 `GET /plans?zip_code=07451&fips_code=33025&household_size=4&household_income=40000`
 
 
+### Sorting
+
+Plans can be sorted by the `premium`, `carrier_name`, `level`, and `plan_type` fields,
+by either ascending (as `asc`) or descending (as `dsc) sort under the `sort` field.
+
+For example, to sort plans by level, the sort parameter would be `level:asc`.
+
+
 ### Example 
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Vericred-Api-Key
+Vericred\Client\Configuration::getDefaultConfiguration()->setApiKey('Vericred-Api-Key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. BEARER) for API key, if needed
+// Vericred\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Vericred-Api-Key', 'BEARER');
 
 $api_instance = new Vericred\Client\Api\PlansApi();
 $body = new \Swagger\Client\Model\RequestPlanFind(); // \Swagger\Client\Model\RequestPlanFind | 
@@ -103,7 +116,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Vericred-Api-Key](../README.md#Vericred-Api-Key)
 
 ### HTTP request headers
 

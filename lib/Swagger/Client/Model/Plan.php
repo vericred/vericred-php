@@ -58,6 +58,7 @@ class Plan implements ArrayAccess
       */
     static $swaggerTypes = array(
         'adult_dental' => 'bool',
+        'age29_rider' => 'bool',
         'ambulance' => 'string',
         'benefits_summary_url' => 'string',
         'buy_link' => 'string',
@@ -68,6 +69,7 @@ class Plan implements ArrayAccess
         'customer_service_phone_number' => 'string',
         'durable_medical_equipment' => 'string',
         'diagnostic_test' => 'string',
+        'dp_rider' => 'bool',
         'drug_formulary_url' => 'string',
         'effective_date' => 'string',
         'expiration_date' => 'string',
@@ -76,6 +78,7 @@ class Plan implements ArrayAccess
         'family_drug_moop' => 'string',
         'family_medical_deductible' => 'string',
         'family_medical_moop' => 'string',
+        'fp_rider' => 'bool',
         'generic_drugs' => 'string',
         'habilitation_services' => 'string',
         'hios_issuer_id' => 'string',
@@ -131,6 +134,7 @@ class Plan implements ArrayAccess
       */
     static $attributeMap = array(
         'adult_dental' => 'adult_dental',
+        'age29_rider' => 'age29_rider',
         'ambulance' => 'ambulance',
         'benefits_summary_url' => 'benefits_summary_url',
         'buy_link' => 'buy_link',
@@ -141,6 +145,7 @@ class Plan implements ArrayAccess
         'customer_service_phone_number' => 'customer_service_phone_number',
         'durable_medical_equipment' => 'durable_medical_equipment',
         'diagnostic_test' => 'diagnostic_test',
+        'dp_rider' => 'dp_rider',
         'drug_formulary_url' => 'drug_formulary_url',
         'effective_date' => 'effective_date',
         'expiration_date' => 'expiration_date',
@@ -149,6 +154,7 @@ class Plan implements ArrayAccess
         'family_drug_moop' => 'family_drug_moop',
         'family_medical_deductible' => 'family_medical_deductible',
         'family_medical_moop' => 'family_medical_moop',
+        'fp_rider' => 'fp_rider',
         'generic_drugs' => 'generic_drugs',
         'habilitation_services' => 'habilitation_services',
         'hios_issuer_id' => 'hios_issuer_id',
@@ -204,6 +210,7 @@ class Plan implements ArrayAccess
       */
     static $setters = array(
         'adult_dental' => 'setAdultDental',
+        'age29_rider' => 'setAge29Rider',
         'ambulance' => 'setAmbulance',
         'benefits_summary_url' => 'setBenefitsSummaryUrl',
         'buy_link' => 'setBuyLink',
@@ -214,6 +221,7 @@ class Plan implements ArrayAccess
         'customer_service_phone_number' => 'setCustomerServicePhoneNumber',
         'durable_medical_equipment' => 'setDurableMedicalEquipment',
         'diagnostic_test' => 'setDiagnosticTest',
+        'dp_rider' => 'setDpRider',
         'drug_formulary_url' => 'setDrugFormularyUrl',
         'effective_date' => 'setEffectiveDate',
         'expiration_date' => 'setExpirationDate',
@@ -222,6 +230,7 @@ class Plan implements ArrayAccess
         'family_drug_moop' => 'setFamilyDrugMoop',
         'family_medical_deductible' => 'setFamilyMedicalDeductible',
         'family_medical_moop' => 'setFamilyMedicalMoop',
+        'fp_rider' => 'setFpRider',
         'generic_drugs' => 'setGenericDrugs',
         'habilitation_services' => 'setHabilitationServices',
         'hios_issuer_id' => 'setHiosIssuerId',
@@ -277,6 +286,7 @@ class Plan implements ArrayAccess
       */
     static $getters = array(
         'adult_dental' => 'getAdultDental',
+        'age29_rider' => 'getAge29Rider',
         'ambulance' => 'getAmbulance',
         'benefits_summary_url' => 'getBenefitsSummaryUrl',
         'buy_link' => 'getBuyLink',
@@ -287,6 +297,7 @@ class Plan implements ArrayAccess
         'customer_service_phone_number' => 'getCustomerServicePhoneNumber',
         'durable_medical_equipment' => 'getDurableMedicalEquipment',
         'diagnostic_test' => 'getDiagnosticTest',
+        'dp_rider' => 'getDpRider',
         'drug_formulary_url' => 'getDrugFormularyUrl',
         'effective_date' => 'getEffectiveDate',
         'expiration_date' => 'getExpirationDate',
@@ -295,6 +306,7 @@ class Plan implements ArrayAccess
         'family_drug_moop' => 'getFamilyDrugMoop',
         'family_medical_deductible' => 'getFamilyMedicalDeductible',
         'family_medical_moop' => 'getFamilyMedicalMoop',
+        'fp_rider' => 'getFpRider',
         'generic_drugs' => 'getGenericDrugs',
         'habilitation_services' => 'getHabilitationServices',
         'hios_issuer_id' => 'getHiosIssuerId',
@@ -350,6 +362,11 @@ class Plan implements ArrayAccess
       */
     protected $adult_dental;
     /**
+      * $age29_rider 
+      * @var bool
+      */
+    protected $age29_rider;
+    /**
       * $ambulance Benefits string for ambulance coverage
       * @var string
       */
@@ -400,6 +417,11 @@ class Plan implements ArrayAccess
       */
     protected $diagnostic_test;
     /**
+      * $dp_rider Is this a domestic plan?
+      * @var bool
+      */
+    protected $dp_rider;
+    /**
       * $drug_formulary_url Link to the summary of drug benefits for the plan
       * @var string
       */
@@ -439,6 +461,11 @@ class Plan implements ArrayAccess
       * @var string
       */
     protected $family_medical_moop;
+    /**
+      * $fp_rider Is this a family plan?
+      * @var bool
+      */
+    protected $fp_rider;
     /**
       * $generic_drugs Cost for generic drugs
       * @var string
@@ -665,6 +692,7 @@ class Plan implements ArrayAccess
         
         if ($data != null) {
             $this->adult_dental = $data["adult_dental"];
+            $this->age29_rider = $data["age29_rider"];
             $this->ambulance = $data["ambulance"];
             $this->benefits_summary_url = $data["benefits_summary_url"];
             $this->buy_link = $data["buy_link"];
@@ -675,6 +703,7 @@ class Plan implements ArrayAccess
             $this->customer_service_phone_number = $data["customer_service_phone_number"];
             $this->durable_medical_equipment = $data["durable_medical_equipment"];
             $this->diagnostic_test = $data["diagnostic_test"];
+            $this->dp_rider = $data["dp_rider"];
             $this->drug_formulary_url = $data["drug_formulary_url"];
             $this->effective_date = $data["effective_date"];
             $this->expiration_date = $data["expiration_date"];
@@ -683,6 +712,7 @@ class Plan implements ArrayAccess
             $this->family_drug_moop = $data["family_drug_moop"];
             $this->family_medical_deductible = $data["family_medical_deductible"];
             $this->family_medical_moop = $data["family_medical_moop"];
+            $this->fp_rider = $data["fp_rider"];
             $this->generic_drugs = $data["generic_drugs"];
             $this->habilitation_services = $data["habilitation_services"];
             $this->hios_issuer_id = $data["hios_issuer_id"];
@@ -746,6 +776,26 @@ class Plan implements ArrayAccess
     {
         
         $this->adult_dental = $adult_dental;
+        return $this;
+    }
+    /**
+     * Gets age29_rider
+     * @return bool
+     */
+    public function getAge29Rider()
+    {
+        return $this->age29_rider;
+    }
+  
+    /**
+     * Sets age29_rider
+     * @param bool $age29_rider 
+     * @return $this
+     */
+    public function setAge29Rider($age29_rider)
+    {
+        
+        $this->age29_rider = $age29_rider;
         return $this;
     }
     /**
@@ -949,6 +999,26 @@ class Plan implements ArrayAccess
         return $this;
     }
     /**
+     * Gets dp_rider
+     * @return bool
+     */
+    public function getDpRider()
+    {
+        return $this->dp_rider;
+    }
+  
+    /**
+     * Sets dp_rider
+     * @param bool $dp_rider Is this a domestic plan?
+     * @return $this
+     */
+    public function setDpRider($dp_rider)
+    {
+        
+        $this->dp_rider = $dp_rider;
+        return $this;
+    }
+    /**
      * Gets drug_formulary_url
      * @return string
      */
@@ -1106,6 +1176,26 @@ class Plan implements ArrayAccess
     {
         
         $this->family_medical_moop = $family_medical_moop;
+        return $this;
+    }
+    /**
+     * Gets fp_rider
+     * @return bool
+     */
+    public function getFpRider()
+    {
+        return $this->fp_rider;
+    }
+  
+    /**
+     * Sets fp_rider
+     * @param bool $fp_rider Is this a family plan?
+     * @return $this
+     */
+    public function setFpRider($fp_rider)
+    {
+        
+        $this->fp_rider = $fp_rider;
         return $this;
     }
     /**

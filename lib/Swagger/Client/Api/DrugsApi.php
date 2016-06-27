@@ -98,13 +98,12 @@ class DrugsApi
      * @param string $ndc_package_code NDC package code (required)
      * @param string $audience Two-character state code (required)
      * @param string $state_code Two-character state code (required)
-     * @param string $vericred_api_key API Key (optional)
      * @return \Swagger\Client\Model\DrugCoverageResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function getDrugCoverages($ndc_package_code, $audience, $state_code, $vericred_api_key = null)
+    public function getDrugCoverages($ndc_package_code, $audience, $state_code)
     {
-        list($response) = $this->getDrugCoveragesWithHttpInfo ($ndc_package_code, $audience, $state_code, $vericred_api_key);
+        list($response) = $this->getDrugCoveragesWithHttpInfo ($ndc_package_code, $audience, $state_code);
         return $response; 
     }
 
@@ -117,11 +116,10 @@ class DrugsApi
      * @param string $ndc_package_code NDC package code (required)
      * @param string $audience Two-character state code (required)
      * @param string $state_code Two-character state code (required)
-     * @param string $vericred_api_key API Key (optional)
      * @return Array of \Swagger\Client\Model\DrugCoverageResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function getDrugCoveragesWithHttpInfo($ndc_package_code, $audience, $state_code, $vericred_api_key = null)
+    public function getDrugCoveragesWithHttpInfo($ndc_package_code, $audience, $state_code)
     {
         
         // verify the required parameter 'ndc_package_code' is set
@@ -158,10 +156,7 @@ class DrugsApi
         if ($state_code !== null) {
             $queryParams['state_code'] = $this->apiClient->getSerializer()->toQueryValue($state_code);
         }
-        // header params
-        if ($vericred_api_key !== null) {
-            $headerParams['Vericred-Api-Key'] = $this->apiClient->getSerializer()->toHeaderValue($vericred_api_key);
-        }
+        
         // path params
         if ($ndc_package_code !== null) {
             $resourcePath = str_replace(
@@ -182,7 +177,14 @@ class DrugsApi
         } elseif (count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
-                // make the API Call
+        
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Vericred-Api-Key');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Vericred-Api-Key'] = $apiKey;
+        }
+        
+        // make the API Call
         try {
             list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
                 $resourcePath, 'GET',
@@ -211,13 +213,12 @@ class DrugsApi
      * Drug Search
      *
      * @param string $search_term Full or partial proprietary name of drug (required)
-     * @param string $vericred_api_key API Key (optional)
      * @return \Swagger\Client\Model\DrugSearchResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function listDrugs($search_term, $vericred_api_key = null)
+    public function listDrugs($search_term)
     {
-        list($response) = $this->listDrugsWithHttpInfo ($search_term, $vericred_api_key);
+        list($response) = $this->listDrugsWithHttpInfo ($search_term);
         return $response; 
     }
 
@@ -228,11 +229,10 @@ class DrugsApi
      * Drug Search
      *
      * @param string $search_term Full or partial proprietary name of drug (required)
-     * @param string $vericred_api_key API Key (optional)
      * @return Array of \Swagger\Client\Model\DrugSearchResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function listDrugsWithHttpInfo($search_term, $vericred_api_key = null)
+    public function listDrugsWithHttpInfo($search_term)
     {
         
         // verify the required parameter 'search_term' is set
@@ -256,10 +256,7 @@ class DrugsApi
         if ($search_term !== null) {
             $queryParams['search_term'] = $this->apiClient->getSerializer()->toQueryValue($search_term);
         }
-        // header params
-        if ($vericred_api_key !== null) {
-            $headerParams['Vericred-Api-Key'] = $this->apiClient->getSerializer()->toHeaderValue($vericred_api_key);
-        }
+        
         
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
@@ -273,7 +270,14 @@ class DrugsApi
         } elseif (count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
-                // make the API Call
+        
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Vericred-Api-Key');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Vericred-Api-Key'] = $apiKey;
+        }
+        
+        // make the API Call
         try {
             list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
                 $resourcePath, 'GET',

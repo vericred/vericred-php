@@ -96,13 +96,12 @@ class ProvidersApi
      * Find a Provider
      *
      * @param string $npi NPI number (required)
-     * @param string $vericred_api_key API Key (optional)
      * @return \Swagger\Client\Model\ProviderShowResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function getProvider($npi, $vericred_api_key = null)
+    public function getProvider($npi)
     {
-        list($response) = $this->getProviderWithHttpInfo ($npi, $vericred_api_key);
+        list($response) = $this->getProviderWithHttpInfo ($npi);
         return $response; 
     }
 
@@ -113,11 +112,10 @@ class ProvidersApi
      * Find a Provider
      *
      * @param string $npi NPI number (required)
-     * @param string $vericred_api_key API Key (optional)
      * @return Array of \Swagger\Client\Model\ProviderShowResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function getProviderWithHttpInfo($npi, $vericred_api_key = null)
+    public function getProviderWithHttpInfo($npi)
     {
         
         // verify the required parameter 'npi' is set
@@ -138,10 +136,7 @@ class ProvidersApi
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(array());
   
         
-        // header params
-        if ($vericred_api_key !== null) {
-            $headerParams['Vericred-Api-Key'] = $this->apiClient->getSerializer()->toHeaderValue($vericred_api_key);
-        }
+        
         // path params
         if ($npi !== null) {
             $resourcePath = str_replace(
@@ -162,7 +157,14 @@ class ProvidersApi
         } elseif (count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
-                // make the API Call
+        
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Vericred-Api-Key');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Vericred-Api-Key'] = $apiKey;
+        }
+        
+        // make the API Call
         try {
             list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
                 $resourcePath, 'GET',
@@ -244,7 +246,14 @@ class ProvidersApi
         } elseif (count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
-                // make the API Call
+        
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Vericred-Api-Key');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Vericred-Api-Key'] = $apiKey;
+        }
+        
+        // make the API Call
         try {
             list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
                 $resourcePath, 'POST',

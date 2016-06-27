@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **getProvider**
-> \Swagger\Client\Model\ProviderShowResponse getProvider($npi, $vericred_api_key)
+> \Swagger\Client\Model\ProviderShowResponse getProvider($npi)
 
 Find a Provider
 
@@ -20,12 +20,16 @@ To retrieve a specific provider, just perform a GET using his NPI number
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
+// Configure API key authorization: Vericred-Api-Key
+Vericred\Client\Configuration::getDefaultConfiguration()->setApiKey('Vericred-Api-Key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. BEARER) for API key, if needed
+// Vericred\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Vericred-Api-Key', 'BEARER');
+
 $api_instance = new Vericred\Client\Api\ProvidersApi();
 $npi = "1234567890"; // string | NPI number
-$vericred_api_key = "api-doc-key"; // string | API Key
 
 try { 
-    $result = $api_instance->getProvider($npi, $vericred_api_key);
+    $result = $api_instance->getProvider($npi);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ProvidersApi->getProvider: ', $e->getMessage(), "\n";
@@ -38,7 +42,6 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **npi** | **string**| NPI number | 
- **vericred_api_key** | **string**| API Key | [optional] 
 
 ### Return type
 
@@ -46,7 +49,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Vericred-Api-Key](../README.md#Vericred-Api-Key)
 
 ### HTTP request headers
 
@@ -80,6 +83,11 @@ Specialty name search.  So, searching "John Smith nose" would return
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
+// Configure API key authorization: Vericred-Api-Key
+Vericred\Client\Configuration::getDefaultConfiguration()->setApiKey('Vericred-Api-Key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. BEARER) for API key, if needed
+// Vericred\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Vericred-Api-Key', 'BEARER');
+
 $api_instance = new Vericred\Client\Api\ProvidersApi();
 $body = new \Swagger\Client\Model\RequestProvidersSearch(); // \Swagger\Client\Model\RequestProvidersSearch | 
 
@@ -104,7 +112,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Vericred-Api-Key](../README.md#Vericred-Api-Key)
 
 ### HTTP request headers
 

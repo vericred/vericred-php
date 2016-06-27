@@ -1,6 +1,6 @@
 <?php
 /**
- * PlanCountyBulk
+ * PlanZipCounty
  *
  * PHP version 5
  *
@@ -35,7 +35,7 @@ namespace Swagger\Client\Model;
 
 use \ArrayAccess;
 /**
- * PlanCountyBulk Class Doc Comment
+ * PlanZipCounty Class Doc Comment
  *
  * @category    Class
  * @description 
@@ -44,13 +44,13 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class PlanCountyBulk implements ArrayAccess
+class PlanZipCounty implements ArrayAccess
 {
     /**
       * The original name of the model.
       * @var string
       */
-    static $swaggerModelName = 'PlanCountyBulk';
+    static $swaggerModelName = 'PlanZipCounty';
 
     /**
       * Array of property to type mappings. Used for (de)serialization 
@@ -58,7 +58,8 @@ class PlanCountyBulk implements ArrayAccess
       */
     static $swaggerTypes = array(
         'plan_id' => 'int',
-        'county_id' => 'int'
+        'county_id' => 'int',
+        'zip_code_id' => 'int'
     );
   
     static function swaggerTypes() {
@@ -71,7 +72,8 @@ class PlanCountyBulk implements ArrayAccess
       */
     static $attributeMap = array(
         'plan_id' => 'plan_id',
-        'county_id' => 'county_id'
+        'county_id' => 'county_id',
+        'zip_code_id' => 'zip_code_id'
     );
   
     static function attributeMap() {
@@ -84,7 +86,8 @@ class PlanCountyBulk implements ArrayAccess
       */
     static $setters = array(
         'plan_id' => 'setPlanId',
-        'county_id' => 'setCountyId'
+        'county_id' => 'setCountyId',
+        'zip_code_id' => 'setZipCodeId'
     );
   
     static function setters() {
@@ -97,7 +100,8 @@ class PlanCountyBulk implements ArrayAccess
       */
     static $getters = array(
         'plan_id' => 'getPlanId',
-        'county_id' => 'getCountyId'
+        'county_id' => 'getCountyId',
+        'zip_code_id' => 'getZipCodeId'
     );
   
     static function getters() {
@@ -114,6 +118,11 @@ class PlanCountyBulk implements ArrayAccess
       * @var int
       */
     protected $county_id;
+    /**
+      * $zip_code_id Foreign key to zip code
+      * @var int
+      */
+    protected $zip_code_id;
 
     /**
      * Constructor
@@ -126,6 +135,7 @@ class PlanCountyBulk implements ArrayAccess
         if ($data != null) {
             $this->plan_id = $data["plan_id"];
             $this->county_id = $data["county_id"];
+            $this->zip_code_id = $data["zip_code_id"];
         }
     }
     /**
@@ -166,6 +176,26 @@ class PlanCountyBulk implements ArrayAccess
     {
         
         $this->county_id = $county_id;
+        return $this;
+    }
+    /**
+     * Gets zip_code_id
+     * @return int
+     */
+    public function getZipCodeId()
+    {
+        return $this->zip_code_id;
+    }
+  
+    /**
+     * Sets zip_code_id
+     * @param int $zip_code_id Foreign key to zip code
+     * @return $this
+     */
+    public function setZipCodeId($zip_code_id)
+    {
+        
+        $this->zip_code_id = $zip_code_id;
         return $this;
     }
     /**
