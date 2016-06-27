@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **getZipCounties**
-> \Swagger\Client\Model\ZipCountyResponse getZipCounties($zip_prefix, $vericred_api_key)
+> \Swagger\Client\Model\ZipCountyResponse getZipCounties($zip_prefix)
 
 Search for Zip Counties
 
@@ -19,12 +19,16 @@ Our `Plan` endpoints require a zip code and a fips (county) code.  This is becau
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
+// Configure API key authorization: Vericred-Api-Key
+Vericred\Client\Configuration::getDefaultConfiguration()->setApiKey('Vericred-Api-Key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. BEARER) for API key, if needed
+// Vericred\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Vericred-Api-Key', 'BEARER');
+
 $api_instance = new Vericred\Client\Api\ZipCountiesApi();
 $zip_prefix = "1002"; // string | Partial five-digit Zip
-$vericred_api_key = "api-doc-key"; // string | API Key
 
 try { 
-    $result = $api_instance->getZipCounties($zip_prefix, $vericred_api_key);
+    $result = $api_instance->getZipCounties($zip_prefix);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ZipCountiesApi->getZipCounties: ', $e->getMessage(), "\n";
@@ -37,7 +41,6 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **zip_prefix** | **string**| Partial five-digit Zip | 
- **vericred_api_key** | **string**| API Key | [optional] 
 
 ### Return type
 
@@ -45,7 +48,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Vericred-Api-Key](../README.md#Vericred-Api-Key)
 
 ### HTTP request headers
 

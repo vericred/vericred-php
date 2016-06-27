@@ -96,12 +96,14 @@ class NetworksApi
      * Networks
      *
      * @param string $carrier_id Carrier HIOS Issuer ID (required)
+     * @param int $page Page of paginated response (optional)
+     * @param int $per_page Responses per page (optional)
      * @return \Swagger\Client\Model\NetworkSearchResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function listNetworks($carrier_id)
+    public function listNetworks($carrier_id, $page = null, $per_page = null)
     {
-        list($response) = $this->listNetworksWithHttpInfo ($carrier_id);
+        list($response) = $this->listNetworksWithHttpInfo ($carrier_id, $page, $per_page);
         return $response; 
     }
 
@@ -112,10 +114,12 @@ class NetworksApi
      * Networks
      *
      * @param string $carrier_id Carrier HIOS Issuer ID (required)
+     * @param int $page Page of paginated response (optional)
+     * @param int $per_page Responses per page (optional)
      * @return Array of \Swagger\Client\Model\NetworkSearchResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function listNetworksWithHttpInfo($carrier_id)
+    public function listNetworksWithHttpInfo($carrier_id, $page = null, $per_page = null)
     {
         
         // verify the required parameter 'carrier_id' is set
@@ -138,6 +142,12 @@ class NetworksApi
         // query params
         if ($carrier_id !== null) {
             $queryParams['carrier_id'] = $this->apiClient->getSerializer()->toQueryValue($carrier_id);
+        }// query params
+        if ($page !== null) {
+            $queryParams['page'] = $this->apiClient->getSerializer()->toQueryValue($page);
+        }// query params
+        if ($per_page !== null) {
+            $queryParams['per_page'] = $this->apiClient->getSerializer()->toQueryValue($per_page);
         }
         
         
@@ -153,7 +163,14 @@ class NetworksApi
         } elseif (count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
-                // make the API Call
+        
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Vericred-Api-Key');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Vericred-Api-Key'] = $apiKey;
+        }
+        
+        // make the API Call
         try {
             list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
                 $resourcePath, 'GET',

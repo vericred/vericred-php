@@ -149,7 +149,14 @@ class PlansApi
         } elseif (count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
-                // make the API Call
+        
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Vericred-Api-Key');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Vericred-Api-Key'] = $apiKey;
+        }
+        
+        // make the API Call
         try {
             list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
                 $resourcePath, 'POST',

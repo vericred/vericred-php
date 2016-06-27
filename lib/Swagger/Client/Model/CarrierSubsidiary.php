@@ -58,7 +58,8 @@ class CarrierSubsidiary implements ArrayAccess
       */
     static $swaggerTypes = array(
         'id' => 'int',
-        'name' => 'string'
+        'name' => 'string',
+        'alternate_name' => 'string'
     );
   
     static function swaggerTypes() {
@@ -71,7 +72,8 @@ class CarrierSubsidiary implements ArrayAccess
       */
     static $attributeMap = array(
         'id' => 'id',
-        'name' => 'name'
+        'name' => 'name',
+        'alternate_name' => 'alternate_name'
     );
   
     static function attributeMap() {
@@ -84,7 +86,8 @@ class CarrierSubsidiary implements ArrayAccess
       */
     static $setters = array(
         'id' => 'setId',
-        'name' => 'setName'
+        'name' => 'setName',
+        'alternate_name' => 'setAlternateName'
     );
   
     static function setters() {
@@ -97,7 +100,8 @@ class CarrierSubsidiary implements ArrayAccess
       */
     static $getters = array(
         'id' => 'getId',
-        'name' => 'getName'
+        'name' => 'getName',
+        'alternate_name' => 'getAlternateName'
     );
   
     static function getters() {
@@ -114,6 +118,11 @@ class CarrierSubsidiary implements ArrayAccess
       * @var string
       */
     protected $name;
+    /**
+      * $alternate_name Parent Carrier Name
+      * @var string
+      */
+    protected $alternate_name;
 
     /**
      * Constructor
@@ -126,6 +135,7 @@ class CarrierSubsidiary implements ArrayAccess
         if ($data != null) {
             $this->id = $data["id"];
             $this->name = $data["name"];
+            $this->alternate_name = $data["alternate_name"];
         }
     }
     /**
@@ -166,6 +176,26 @@ class CarrierSubsidiary implements ArrayAccess
     {
         
         $this->name = $name;
+        return $this;
+    }
+    /**
+     * Gets alternate_name
+     * @return string
+     */
+    public function getAlternateName()
+    {
+        return $this->alternate_name;
+    }
+  
+    /**
+     * Sets alternate_name
+     * @param string $alternate_name Parent Carrier Name
+     * @return $this
+     */
+    public function setAlternateName($alternate_name)
+    {
+        
+        $this->alternate_name = $alternate_name;
         return $this;
     }
     /**

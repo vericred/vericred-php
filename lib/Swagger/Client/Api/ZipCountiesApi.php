@@ -96,13 +96,12 @@ class ZipCountiesApi
      * Search for Zip Counties
      *
      * @param string $zip_prefix Partial five-digit Zip (required)
-     * @param string $vericred_api_key API Key (optional)
      * @return \Swagger\Client\Model\ZipCountyResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function getZipCounties($zip_prefix, $vericred_api_key = null)
+    public function getZipCounties($zip_prefix)
     {
-        list($response) = $this->getZipCountiesWithHttpInfo ($zip_prefix, $vericred_api_key);
+        list($response) = $this->getZipCountiesWithHttpInfo ($zip_prefix);
         return $response; 
     }
 
@@ -113,11 +112,10 @@ class ZipCountiesApi
      * Search for Zip Counties
      *
      * @param string $zip_prefix Partial five-digit Zip (required)
-     * @param string $vericred_api_key API Key (optional)
      * @return Array of \Swagger\Client\Model\ZipCountyResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function getZipCountiesWithHttpInfo($zip_prefix, $vericred_api_key = null)
+    public function getZipCountiesWithHttpInfo($zip_prefix)
     {
         
         // verify the required parameter 'zip_prefix' is set
@@ -141,10 +139,7 @@ class ZipCountiesApi
         if ($zip_prefix !== null) {
             $queryParams['zip_prefix'] = $this->apiClient->getSerializer()->toQueryValue($zip_prefix);
         }
-        // header params
-        if ($vericred_api_key !== null) {
-            $headerParams['Vericred-Api-Key'] = $this->apiClient->getSerializer()->toHeaderValue($vericred_api_key);
-        }
+        
         
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
@@ -158,7 +153,14 @@ class ZipCountiesApi
         } elseif (count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
-                // make the API Call
+        
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Vericred-Api-Key');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Vericred-Api-Key'] = $apiKey;
+        }
+        
+        // make the API Call
         try {
             list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
                 $resourcePath, 'GET',

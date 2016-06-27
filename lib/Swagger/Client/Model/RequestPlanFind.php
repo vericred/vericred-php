@@ -65,6 +65,9 @@ class RequestPlanFind implements ArrayAccess
         'household_size' => 'int',
         'market' => 'string',
         'providers' => '\Swagger\Client\Model\RequestPlanFindProvider[]',
+        'page' => 'int',
+        'per_page' => 'int',
+        'sort' => 'string',
         'zip_code' => 'string'
     );
   
@@ -85,6 +88,9 @@ class RequestPlanFind implements ArrayAccess
         'household_size' => 'household_size',
         'market' => 'market',
         'providers' => 'providers',
+        'page' => 'page',
+        'per_page' => 'per_page',
+        'sort' => 'sort',
         'zip_code' => 'zip_code'
     );
   
@@ -105,6 +111,9 @@ class RequestPlanFind implements ArrayAccess
         'household_size' => 'setHouseholdSize',
         'market' => 'setMarket',
         'providers' => 'setProviders',
+        'page' => 'setPage',
+        'per_page' => 'setPerPage',
+        'sort' => 'setSort',
         'zip_code' => 'setZipCode'
     );
   
@@ -125,6 +134,9 @@ class RequestPlanFind implements ArrayAccess
         'household_size' => 'getHouseholdSize',
         'market' => 'getMarket',
         'providers' => 'getProviders',
+        'page' => 'getPage',
+        'per_page' => 'getPerPage',
+        'sort' => 'getSort',
         'zip_code' => 'getZipCode'
     );
   
@@ -173,6 +185,21 @@ class RequestPlanFind implements ArrayAccess
       */
     protected $providers;
     /**
+      * $page Selected page of paginated response.
+      * @var int
+      */
+    protected $page;
+    /**
+      * $per_page Results per page of response.
+      * @var int
+      */
+    protected $per_page;
+    /**
+      * $sort Sort responses by plan field.
+      * @var string
+      */
+    protected $sort;
+    /**
       * $zip_code 5-digit zip code - this helps determine pricing.
       * @var string
       */
@@ -195,6 +222,9 @@ class RequestPlanFind implements ArrayAccess
             $this->household_size = $data["household_size"];
             $this->market = $data["market"];
             $this->providers = $data["providers"];
+            $this->page = $data["page"];
+            $this->per_page = $data["per_page"];
+            $this->sort = $data["sort"];
             $this->zip_code = $data["zip_code"];
         }
     }
@@ -356,6 +386,66 @@ class RequestPlanFind implements ArrayAccess
     {
         
         $this->providers = $providers;
+        return $this;
+    }
+    /**
+     * Gets page
+     * @return int
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+  
+    /**
+     * Sets page
+     * @param int $page Selected page of paginated response.
+     * @return $this
+     */
+    public function setPage($page)
+    {
+        
+        $this->page = $page;
+        return $this;
+    }
+    /**
+     * Gets per_page
+     * @return int
+     */
+    public function getPerPage()
+    {
+        return $this->per_page;
+    }
+  
+    /**
+     * Sets per_page
+     * @param int $per_page Results per page of response.
+     * @return $this
+     */
+    public function setPerPage($per_page)
+    {
+        
+        $this->per_page = $per_page;
+        return $this;
+    }
+    /**
+     * Gets sort
+     * @return string
+     */
+    public function getSort()
+    {
+        return $this->sort;
+    }
+  
+    /**
+     * Sets sort
+     * @param string $sort Sort responses by plan field.
+     * @return $this
+     */
+    public function setSort($sort)
+    {
+        
+        $this->sort = $sort;
         return $this;
     }
     /**
