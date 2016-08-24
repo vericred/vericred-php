@@ -155,8 +155,6 @@ namespace Swagger\Client\Model;
 
 use \ArrayAccess;
 
-
-
 /**
  * Carrier Class Doc Comment
  *

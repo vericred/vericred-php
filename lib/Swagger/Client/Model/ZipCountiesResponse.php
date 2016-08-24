@@ -155,8 +155,6 @@ namespace Swagger\Client\Model;
 
 use \ArrayAccess;
 
-
-
 /**
  * ZipCountiesResponse Class Doc Comment
  *

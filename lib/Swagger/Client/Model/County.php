@@ -155,8 +155,6 @@ namespace Swagger\Client\Model;
 
 use \ArrayAccess;
 
-
-
 /**
  * County Class Doc Comment
  *

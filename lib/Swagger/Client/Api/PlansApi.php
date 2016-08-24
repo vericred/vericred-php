@@ -217,10 +217,9 @@ class PlansApi
     /**
      * Operation findPlans
      *
-     * Find Plans.
-     */
-   //  * @param \Swagger\Client\Model\RequestPlanFind $body  (optional)
-    /**
+     * Find Plans
+     *
+     * @param \Swagger\Client\Model\RequestPlanFind $body  (optional)
      * @return \Swagger\Client\Model\PlanSearchResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
@@ -230,20 +229,17 @@ class PlansApi
         return $response;
     }
 
-
     /**
      * Operation findPlansWithHttpInfo
      *
-     * Find Plans.
-     */
-   //  * @param \Swagger\Client\Model\RequestPlanFind $body  (optional)
-    /**
+     * Find Plans
+     *
+     * @param \Swagger\Client\Model\RequestPlanFind $body  (optional)
      * @return Array of \Swagger\Client\Model\PlanSearchResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
     public function findPlansWithHttpInfo($body = null)
     {
-        
         // parse inputs
         $resourcePath = "/plans/search";
         $httpBody = '';
@@ -256,13 +252,9 @@ class PlansApi
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(array());
 
-        
-        
-        
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
 
-        
         // body params
         $_tempBody = null;
         if (isset($body)) {
@@ -275,13 +267,11 @@ class PlansApi
         } elseif (count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
-        
         // this endpoint requires API key authentication
         $apiKey = $this->apiClient->getApiKeyWithPrefix('Vericred-Api-Key');
         if (strlen($apiKey) !== 0) {
             $headerParams['Vericred-Api-Key'] = $apiKey;
         }
-        
         // make the API Call
         try {
             list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
@@ -290,7 +280,8 @@ class PlansApi
                 $queryParams,
                 $httpBody,
                 $headerParams,
-                '\Swagger\Client\Model\PlanSearchResponse'
+                '\Swagger\Client\Model\PlanSearchResponse',
+                '/plans/search'
             );
 
             return array($this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\PlanSearchResponse', $httpHeader), $statusCode, $httpHeader);
@@ -305,4 +296,87 @@ class PlansApi
             throw $e;
         }
     }
+
+    /**
+     * Operation showPlan
+     *
+     * Show Plan
+     *
+     * @param int $year Plan year (defaults to current year) (optional)
+     * @return \Swagger\Client\Model\PlanShowResponse
+     * @throws \Vericred\Client\ApiException on non-2xx response
+     */
+    public function showPlan($year = null)
+    {
+        list($response) = $this->showPlanWithHttpInfo($year);
+        return $response;
+    }
+
+    /**
+     * Operation showPlanWithHttpInfo
+     *
+     * Show Plan
+     *
+     * @param int $year Plan year (defaults to current year) (optional)
+     * @return Array of \Swagger\Client\Model\PlanShowResponse, HTTP status code, HTTP response headers (array of strings)
+     * @throws \Vericred\Client\ApiException on non-2xx response
+     */
+    public function showPlanWithHttpInfo($year = null)
+    {
+        // parse inputs
+        $resourcePath = "/plans/{id}";
+        $httpBody = '';
+        $queryParams = array();
+        $headerParams = array();
+        $formParams = array();
+        $_header_accept = $this->apiClient->selectHeaderAccept(array('application/json'));
+        if (!is_null($_header_accept)) {
+            $headerParams['Accept'] = $_header_accept;
+        }
+        $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(array('application/json'));
+
+        // query params
+        if ($year !== null) {
+            $queryParams['year'] = $this->apiClient->getSerializer()->toQueryValue($year);
+        }
+        // default format to json
+        $resourcePath = str_replace("{format}", "json", $resourcePath);
+
+        
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            $httpBody = $_tempBody; // $_tempBody is the method argument, if present
+        } elseif (count($formParams) > 0) {
+            $httpBody = $formParams; // for HTTP post (form)
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->apiClient->getApiKeyWithPrefix('Vericred-Api-Key');
+        if (strlen($apiKey) !== 0) {
+            $headerParams['Vericred-Api-Key'] = $apiKey;
+        }
+        // make the API Call
+        try {
+            list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
+                $resourcePath,
+                'GET',
+                $queryParams,
+                $httpBody,
+                $headerParams,
+                '\Swagger\Client\Model\PlanShowResponse',
+                '/plans/{id}'
+            );
+
+            return array($this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\PlanShowResponse', $httpHeader), $statusCode, $httpHeader);
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = $this->apiClient->getSerializer()->deserialize($e->getResponseBody(), '\Swagger\Client\Model\PlanShowResponse', $e->getResponseHeaders());
+                    $e->setResponseObject($data);
+                    break;
+            }
+
+            throw $e;
+        }
+    }
+
 }

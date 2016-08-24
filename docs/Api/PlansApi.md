@@ -5,6 +5,7 @@ All URIs are relative to *https://api.vericred.com/*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**findPlans**](PlansApi.md#findPlans) | **POST** /plans/search | Find Plans
+[**showPlan**](PlansApi.md#showPlan) | **GET** /plans/{id} | Show Plan
 
 
 # **findPlans**
@@ -54,6 +55,56 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **showPlan**
+> \Swagger\Client\Model\PlanShowResponse showPlan($year)
+
+Show Plan
+
+Show the details of an individual Plan.  This includes deductibles, maximums out of pocket, and co-pay/coinsurance for benefits
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Vericred-Api-Key
+Vericred\Client\Configuration::getDefaultConfiguration()->setApiKey('Vericred-Api-Key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// Vericred\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Vericred-Api-Key', 'Bearer');
+
+$api_instance = new Vericred\Client\Api\PlansApi();
+$year = 2016; // int | Plan year (defaults to current year)
+
+try {
+    $result = $api_instance->showPlan($year);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PlansApi->showPlan: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **year** | **int**| Plan year (defaults to current year) | [optional]
+
+### Return type
+
+[**\Swagger\Client\Model\PlanShowResponse**](../Model/PlanShowResponse.md)
+
+### Authorization
+
+[Vericred-Api-Key](../../README.md#Vericred-Api-Key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 

@@ -212,4 +212,15 @@ class PlansApiTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * Test case for showPlan
+     *
+     * Show Plan.
+     *
+     */
+    public function testShowPlan()
+    {
+
+    }
+
 }

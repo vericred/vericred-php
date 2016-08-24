@@ -155,8 +155,6 @@ namespace Swagger\Client\Model;
 
 use \ArrayAccess;
 
-
-
 /**
  * RequestPlanFind Class Doc Comment
  *
@@ -182,10 +180,11 @@ class RequestPlanFind implements ArrayAccess
     protected static $swaggerTypes = array(
         'applicants' => '\Swagger\Client\Model\RequestPlanFindApplicant[]',
         'enrollment_date' => 'string',
-        'drug_packages' => '\Swagger\Client\Model\DrugPackage[]',
+        'drug_packages' => '\Swagger\Client\Model\RequestPlanFindDrugPackage[]',
         'fips_code' => 'string',
         'household_income' => 'int',
         'household_size' => 'int',
+        'ids' => 'int[]',
         'market' => 'string',
         'providers' => '\Swagger\Client\Model\RequestPlanFindProvider[]',
         'page' => 'int',
@@ -210,6 +209,7 @@ class RequestPlanFind implements ArrayAccess
         'fips_code' => 'fips_code',
         'household_income' => 'household_income',
         'household_size' => 'household_size',
+        'ids' => 'ids',
         'market' => 'market',
         'providers' => 'providers',
         'page' => 'page',
@@ -234,6 +234,7 @@ class RequestPlanFind implements ArrayAccess
         'fips_code' => 'setFipsCode',
         'household_income' => 'setHouseholdIncome',
         'household_size' => 'setHouseholdSize',
+        'ids' => 'setIds',
         'market' => 'setMarket',
         'providers' => 'setProviders',
         'page' => 'setPage',
@@ -258,6 +259,7 @@ class RequestPlanFind implements ArrayAccess
         'fips_code' => 'getFipsCode',
         'household_income' => 'getHouseholdIncome',
         'household_size' => 'getHouseholdSize',
+        'ids' => 'getIds',
         'market' => 'getMarket',
         'providers' => 'getProviders',
         'page' => 'getPage',
@@ -293,6 +295,7 @@ class RequestPlanFind implements ArrayAccess
         $this->container['fips_code'] = isset($data['fips_code']) ? $data['fips_code'] : null;
         $this->container['household_income'] = isset($data['household_income']) ? $data['household_income'] : null;
         $this->container['household_size'] = isset($data['household_size']) ? $data['household_size'] : null;
+        $this->container['ids'] = isset($data['ids']) ? $data['ids'] : null;
         $this->container['market'] = isset($data['market']) ? $data['market'] : null;
         $this->container['providers'] = isset($data['providers']) ? $data['providers'] : null;
         $this->container['page'] = isset($data['page']) ? $data['page'] : null;
@@ -368,7 +371,7 @@ class RequestPlanFind implements ArrayAccess
 
     /**
      * Gets drug_packages
-     * @return \Swagger\Client\Model\DrugPackage[]
+     * @return \Swagger\Client\Model\RequestPlanFindDrugPackage[]
      */
     public function getDrugPackages()
     {
@@ -377,7 +380,7 @@ class RequestPlanFind implements ArrayAccess
 
     /**
      * Sets drug_packages
-     * @param \Swagger\Client\Model\DrugPackage[] $drug_packages National Drug Code Package Id
+     * @param \Swagger\Client\Model\RequestPlanFindDrugPackage[] $drug_packages National Drug Code Package Id
      * @return $this
      */
     public function setDrugPackages($drug_packages)
@@ -446,6 +449,27 @@ class RequestPlanFind implements ArrayAccess
     public function setHouseholdSize($household_size)
     {
         $this->container['household_size'] = $household_size;
+
+        return $this;
+    }
+
+    /**
+     * Gets ids
+     * @return int[]
+     */
+    public function getIds()
+    {
+        return $this->container['ids'];
+    }
+
+    /**
+     * Sets ids
+     * @param int[] $ids List of plan IDs to filter by
+     * @return $this
+     */
+    public function setIds($ids)
+    {
+        $this->container['ids'] = $ids;
 
         return $this;
     }

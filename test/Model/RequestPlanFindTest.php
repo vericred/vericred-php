@@ -256,6 +256,14 @@ class RequestPlanFindTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "ids"
+     */
+    public function testPropertyIds()
+    {
+
+    }
+
+    /**
      * Test attribute "market"
      */
     public function testPropertyMarket()

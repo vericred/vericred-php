@@ -1,6 +1,6 @@
 <?php
 /**
- * PlanZipCountyTest
+ * ServiceAreaTest
  *
  * PHP version 5
  *
@@ -154,17 +154,17 @@ The response would be
 namespace Vericred\Client;
 
 /**
- * PlanZipCountyTest Class Doc Comment
+ * ServiceAreaTest Class Doc Comment
  *
  * @category    Class */
-// * @description PlanZipCounty
+// * @description ServiceArea
 /**
  * @package     Vericred\Client
  * @author      http://github.com/swagger-api/swagger-codegen
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class PlanZipCountyTest extends \PHPUnit_Framework_TestCase
+class ServiceAreaTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -200,33 +200,33 @@ class PlanZipCountyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "PlanZipCounty"
+     * Test "ServiceArea"
      */
-    public function testPlanZipCounty()
+    public function testServiceArea()
     {
 
     }
 
     /**
-     * Test attribute "plan_id"
+     * Test attribute "id"
      */
-    public function testPropertyPlanId()
+    public function testPropertyId()
     {
 
     }
 
     /**
-     * Test attribute "county_id"
+     * Test attribute "issuer_id"
      */
-    public function testPropertyCountyId()
+    public function testPropertyIssuerId()
     {
 
     }
 
     /**
-     * Test attribute "zip_code_id"
+     * Test attribute "name"
      */
-    public function testPropertyZipCodeId()
+    public function testPropertyName()
     {
 
     }

@@ -217,10 +217,9 @@ class ZipCountiesApi
     /**
      * Operation getZipCounties
      *
-     * Search for Zip Counties.
-     */
-   //  * @param string $zip_prefix Partial five-digit Zip (required)
-    /**
+     * Search for Zip Counties
+     *
+     * @param string $zip_prefix Partial five-digit Zip (required)
      * @return \Swagger\Client\Model\ZipCountyResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
@@ -230,25 +229,21 @@ class ZipCountiesApi
         return $response;
     }
 
-
     /**
      * Operation getZipCountiesWithHttpInfo
      *
-     * Search for Zip Counties.
-     */
-   //  * @param string $zip_prefix Partial five-digit Zip (required)
-    /**
+     * Search for Zip Counties
+     *
+     * @param string $zip_prefix Partial five-digit Zip (required)
      * @return Array of \Swagger\Client\Model\ZipCountyResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
     public function getZipCountiesWithHttpInfo($zip_prefix)
     {
-        
         // verify the required parameter 'zip_prefix' is set
         if ($zip_prefix === null) {
             throw new \InvalidArgumentException('Missing the required parameter $zip_prefix when calling getZipCounties');
         }
-
         // parse inputs
         $resourcePath = "/zip_counties";
         $httpBody = '';
@@ -265,27 +260,21 @@ class ZipCountiesApi
         if ($zip_prefix !== null) {
             $queryParams['zip_prefix'] = $this->apiClient->getSerializer()->toQueryValue($zip_prefix);
         }
-        
-        
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
 
         
-        
-
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
         } elseif (count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
-        
         // this endpoint requires API key authentication
         $apiKey = $this->apiClient->getApiKeyWithPrefix('Vericred-Api-Key');
         if (strlen($apiKey) !== 0) {
             $headerParams['Vericred-Api-Key'] = $apiKey;
         }
-        
         // make the API Call
         try {
             list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
@@ -294,7 +283,8 @@ class ZipCountiesApi
                 $queryParams,
                 $httpBody,
                 $headerParams,
-                '\Swagger\Client\Model\ZipCountyResponse'
+                '\Swagger\Client\Model\ZipCountyResponse',
+                '/zip_counties'
             );
 
             return array($this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\ZipCountyResponse', $httpHeader), $statusCode, $httpHeader);
@@ -309,4 +299,5 @@ class ZipCountiesApi
             throw $e;
         }
     }
+
 }
