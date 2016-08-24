@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **getProvider**
-> \Swagger\Client\Model\ProviderShowResponse getProvider($npi)
+> \Swagger\Client\Model\ProviderShowResponse getProvider($npi, $year, $state)
 
 Find a Provider
 
@@ -27,9 +27,11 @@ Vericred\Client\Configuration::getDefaultConfiguration()->setApiKey('Vericred-Ap
 
 $api_instance = new Vericred\Client\Api\ProvidersApi();
 $npi = "1234567890"; // string | NPI number
+$year = "2016"; // string | Only show plan ids for the given year
+$state = "NY"; // string | Only show plan ids for the given state
 
 try {
-    $result = $api_instance->getProvider($npi);
+    $result = $api_instance->getProvider($npi, $year, $state);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ProvidersApi->getProvider: ', $e->getMessage(), PHP_EOL;
@@ -42,6 +44,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **npi** | **string**| NPI number |
+ **year** | **string**| Only show plan ids for the given year | [optional]
+ **state** | **string**| Only show plan ids for the given state | [optional]
 
 ### Return type
 

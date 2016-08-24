@@ -1,6 +1,6 @@
 <?php
 /**
- * PlanZipCounty
+ * RequestPlanFindDrugPackage
  *
  * PHP version 5
  *
@@ -155,10 +155,8 @@ namespace Swagger\Client\Model;
 
 use \ArrayAccess;
 
-
-
 /**
- * PlanZipCounty Class Doc Comment
+ * RequestPlanFindDrugPackage Class Doc Comment
  *
  * @category    Class */
 /** 
@@ -167,22 +165,20 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class PlanZipCounty implements ArrayAccess
+class RequestPlanFindDrugPackage implements ArrayAccess
 {
     /**
       * The original name of the model.
       * @var string
       */
-    protected static $swaggerModelName = 'PlanZipCounty';
+    protected static $swaggerModelName = 'RequestPlanFindDrugPackage';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     protected static $swaggerTypes = array(
-        'plan_id' => 'int',
-        'county_id' => 'int',
-        'zip_code_id' => 'int'
+        'id' => 'string'
     );
 
     public static function swaggerTypes()
@@ -195,9 +191,7 @@ class PlanZipCounty implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = array(
-        'plan_id' => 'plan_id',
-        'county_id' => 'county_id',
-        'zip_code_id' => 'zip_code_id'
+        'id' => 'id'
     );
 
     public static function attributeMap()
@@ -210,9 +204,7 @@ class PlanZipCounty implements ArrayAccess
      * @var string[]
      */
     protected static $setters = array(
-        'plan_id' => 'setPlanId',
-        'county_id' => 'setCountyId',
-        'zip_code_id' => 'setZipCodeId'
+        'id' => 'setId'
     );
 
     public static function setters()
@@ -225,9 +217,7 @@ class PlanZipCounty implements ArrayAccess
      * @var string[]
      */
     protected static $getters = array(
-        'plan_id' => 'getPlanId',
-        'county_id' => 'getCountyId',
-        'zip_code_id' => 'getZipCodeId'
+        'id' => 'getId'
     );
 
     public static function getters()
@@ -251,9 +241,7 @@ class PlanZipCounty implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['plan_id'] = isset($data['plan_id']) ? $data['plan_id'] : null;
-        $this->container['county_id'] = isset($data['county_id']) ? $data['county_id'] : null;
-        $this->container['zip_code_id'] = isset($data['zip_code_id']) ? $data['zip_code_id'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
     }
 
     /**
@@ -280,64 +268,22 @@ class PlanZipCounty implements ArrayAccess
 
 
     /**
-     * Gets plan_id
-     * @return int
+     * Gets id
+     * @return string
      */
-    public function getPlanId()
+    public function getId()
     {
-        return $this->container['plan_id'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets plan_id
-     * @param int $plan_id Foreign key to plan
+     * Sets id
+     * @param string $id National Drug Code ID (Package)
      * @return $this
      */
-    public function setPlanId($plan_id)
+    public function setId($id)
     {
-        $this->container['plan_id'] = $plan_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets county_id
-     * @return int
-     */
-    public function getCountyId()
-    {
-        return $this->container['county_id'];
-    }
-
-    /**
-     * Sets county_id
-     * @param int $county_id Foreign key to county
-     * @return $this
-     */
-    public function setCountyId($county_id)
-    {
-        $this->container['county_id'] = $county_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets zip_code_id
-     * @return int
-     */
-    public function getZipCodeId()
-    {
-        return $this->container['zip_code_id'];
-    }
-
-    /**
-     * Sets zip_code_id
-     * @param int $zip_code_id Foreign key to zip code
-     * @return $this
-     */
-    public function setZipCodeId($zip_code_id)
-    {
-        $this->container['zip_code_id'] = $zip_code_id;
+        $this->container['id'] = $id;
 
         return $this;
     }

@@ -231,4 +231,20 @@ class CountyBulkTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * Test attribute "rating_area_count"
+     */
+    public function testPropertyRatingAreaCount()
+    {
+
+    }
+
+    /**
+     * Test attribute "service_area_count"
+     */
+    public function testPropertyServiceAreaCount()
+    {
+
+    }
+
 }

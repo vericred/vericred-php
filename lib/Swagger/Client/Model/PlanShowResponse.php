@@ -1,6 +1,6 @@
 <?php
 /**
- * ZipCountyBulk
+ * PlanShowResponse
  *
  * PHP version 5
  *
@@ -156,7 +156,7 @@ namespace Swagger\Client\Model;
 use \ArrayAccess;
 
 /**
- * ZipCountyBulk Class Doc Comment
+ * PlanShowResponse Class Doc Comment
  *
  * @category    Class */
 /** 
@@ -165,23 +165,20 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class ZipCountyBulk implements ArrayAccess
+class PlanShowResponse implements ArrayAccess
 {
     /**
       * The original name of the model.
       * @var string
       */
-    protected static $swaggerModelName = 'ZipCountyBulk';
+    protected static $swaggerModelName = 'PlanShowResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     protected static $swaggerTypes = array(
-        'id' => 'int',
-        'rating_area_id' => 'string',
-        'county_id' => 'string',
-        'zip_code_id' => 'string'
+        'plan' => '\Swagger\Client\Model\Plan'
     );
 
     public static function swaggerTypes()
@@ -194,10 +191,7 @@ class ZipCountyBulk implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = array(
-        'id' => 'id',
-        'rating_area_id' => 'rating_area_id',
-        'county_id' => 'county_id',
-        'zip_code_id' => 'zip_code_id'
+        'plan' => 'plan'
     );
 
     public static function attributeMap()
@@ -210,10 +204,7 @@ class ZipCountyBulk implements ArrayAccess
      * @var string[]
      */
     protected static $setters = array(
-        'id' => 'setId',
-        'rating_area_id' => 'setRatingAreaId',
-        'county_id' => 'setCountyId',
-        'zip_code_id' => 'setZipCodeId'
+        'plan' => 'setPlan'
     );
 
     public static function setters()
@@ -226,10 +217,7 @@ class ZipCountyBulk implements ArrayAccess
      * @var string[]
      */
     protected static $getters = array(
-        'id' => 'getId',
-        'rating_area_id' => 'getRatingAreaId',
-        'county_id' => 'getCountyId',
-        'zip_code_id' => 'getZipCodeId'
+        'plan' => 'getPlan'
     );
 
     public static function getters()
@@ -253,10 +241,7 @@ class ZipCountyBulk implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['rating_area_id'] = isset($data['rating_area_id']) ? $data['rating_area_id'] : null;
-        $this->container['county_id'] = isset($data['county_id']) ? $data['county_id'] : null;
-        $this->container['zip_code_id'] = isset($data['zip_code_id']) ? $data['zip_code_id'] : null;
+        $this->container['plan'] = isset($data['plan']) ? $data['plan'] : null;
     }
 
     /**
@@ -283,85 +268,22 @@ class ZipCountyBulk implements ArrayAccess
 
 
     /**
-     * Gets id
-     * @return int
+     * Gets plan
+     * @return \Swagger\Client\Model\Plan
      */
-    public function getId()
+    public function getPlan()
     {
-        return $this->container['id'];
+        return $this->container['plan'];
     }
 
     /**
-     * Sets id
-     * @param int $id Primary key
+     * Sets plan
+     * @param \Swagger\Client\Model\Plan $plan Plan response
      * @return $this
      */
-    public function setId($id)
+    public function setPlan($plan)
     {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets rating_area_id
-     * @return string
-     */
-    public function getRatingAreaId()
-    {
-        return $this->container['rating_area_id'];
-    }
-
-    /**
-     * Sets rating_area_id
-     * @param string $rating_area_id Foreign key for rating area
-     * @return $this
-     */
-    public function setRatingAreaId($rating_area_id)
-    {
-        $this->container['rating_area_id'] = $rating_area_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets county_id
-     * @return string
-     */
-    public function getCountyId()
-    {
-        return $this->container['county_id'];
-    }
-
-    /**
-     * Sets county_id
-     * @param string $county_id Foreign key for county (fips code)
-     * @return $this
-     */
-    public function setCountyId($county_id)
-    {
-        $this->container['county_id'] = $county_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets zip_code_id
-     * @return string
-     */
-    public function getZipCodeId()
-    {
-        return $this->container['zip_code_id'];
-    }
-
-    /**
-     * Sets zip_code_id
-     * @param string $zip_code_id Foreign key for zip code (zip code)
-     * @return $this
-     */
-    public function setZipCodeId($zip_code_id)
-    {
-        $this->container['zip_code_id'] = $zip_code_id;
+        $this->container['plan'] = $plan;
 
         return $this;
     }

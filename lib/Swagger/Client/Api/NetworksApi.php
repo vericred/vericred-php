@@ -217,12 +217,11 @@ class NetworksApi
     /**
      * Operation listNetworks
      *
-     * Networks.
-     */
-   //  * @param string $carrier_id Carrier HIOS Issuer ID (required)
- //  * @param int $page Page of paginated response (optional)
- //  * @param int $per_page Responses per page (optional)
-    /**
+     * Networks
+     *
+     * @param string $carrier_id Carrier HIOS Issuer ID (required)
+     * @param int $page Page of paginated response (optional)
+     * @param int $per_page Responses per page (optional)
      * @return \Swagger\Client\Model\NetworkSearchResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
@@ -232,27 +231,23 @@ class NetworksApi
         return $response;
     }
 
-
     /**
      * Operation listNetworksWithHttpInfo
      *
-     * Networks.
-     */
-   //  * @param string $carrier_id Carrier HIOS Issuer ID (required)
- //  * @param int $page Page of paginated response (optional)
- //  * @param int $per_page Responses per page (optional)
-    /**
+     * Networks
+     *
+     * @param string $carrier_id Carrier HIOS Issuer ID (required)
+     * @param int $page Page of paginated response (optional)
+     * @param int $per_page Responses per page (optional)
      * @return Array of \Swagger\Client\Model\NetworkSearchResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
     public function listNetworksWithHttpInfo($carrier_id, $page = null, $per_page = null)
     {
-        
         // verify the required parameter 'carrier_id' is set
         if ($carrier_id === null) {
             throw new \InvalidArgumentException('Missing the required parameter $carrier_id when calling listNetworks');
         }
-
         // parse inputs
         $resourcePath = "/networks";
         $httpBody = '';
@@ -268,34 +263,30 @@ class NetworksApi
         // query params
         if ($carrier_id !== null) {
             $queryParams['carrier_id'] = $this->apiClient->getSerializer()->toQueryValue($carrier_id);
-        }// query params
+        }
+        // query params
         if ($page !== null) {
             $queryParams['page'] = $this->apiClient->getSerializer()->toQueryValue($page);
-        }// query params
+        }
+        // query params
         if ($per_page !== null) {
             $queryParams['per_page'] = $this->apiClient->getSerializer()->toQueryValue($per_page);
         }
-        
-        
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
 
         
-        
-
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
         } elseif (count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
-        
         // this endpoint requires API key authentication
         $apiKey = $this->apiClient->getApiKeyWithPrefix('Vericred-Api-Key');
         if (strlen($apiKey) !== 0) {
             $headerParams['Vericred-Api-Key'] = $apiKey;
         }
-        
         // make the API Call
         try {
             list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
@@ -304,7 +295,8 @@ class NetworksApi
                 $queryParams,
                 $httpBody,
                 $headerParams,
-                '\Swagger\Client\Model\NetworkSearchResponse'
+                '\Swagger\Client\Model\NetworkSearchResponse',
+                '/networks'
             );
 
             return array($this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\NetworkSearchResponse', $httpHeader), $statusCode, $httpHeader);
@@ -319,4 +311,5 @@ class NetworksApi
             throw $e;
         }
     }
+
 }

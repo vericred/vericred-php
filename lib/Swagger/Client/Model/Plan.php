@@ -155,8 +155,6 @@ namespace Swagger\Client\Model;
 
 use \ArrayAccess;
 
-
-
 /**
  * Plan Class Doc Comment
  *
@@ -192,6 +190,7 @@ class Plan implements ArrayAccess
         'customer_service_phone_number' => 'string',
         'durable_medical_equipment' => 'string',
         'diagnostic_test' => 'string',
+        'display_name' => 'string',
         'dp_rider' => 'bool',
         'drug_formulary_url' => 'string',
         'effective_date' => 'string',
@@ -207,6 +206,7 @@ class Plan implements ArrayAccess
         'hios_issuer_id' => 'string',
         'home_health_care' => 'string',
         'hospice_service' => 'string',
+        'hsa_eligible' => 'bool',
         'id' => 'string',
         'imaging' => 'string',
         'in_network_ids' => 'int[]',
@@ -241,6 +241,7 @@ class Plan implements ArrayAccess
         'premium' => 'float',
         'primary_care_physician' => 'string',
         'rehabilitation_services' => 'string',
+        'service_area_id' => 'string',
         'skilled_nursing' => 'string',
         'specialist' => 'string',
         'specialty_drugs' => 'string',
@@ -269,6 +270,7 @@ class Plan implements ArrayAccess
         'customer_service_phone_number' => 'customer_service_phone_number',
         'durable_medical_equipment' => 'durable_medical_equipment',
         'diagnostic_test' => 'diagnostic_test',
+        'display_name' => 'display_name',
         'dp_rider' => 'dp_rider',
         'drug_formulary_url' => 'drug_formulary_url',
         'effective_date' => 'effective_date',
@@ -284,6 +286,7 @@ class Plan implements ArrayAccess
         'hios_issuer_id' => 'hios_issuer_id',
         'home_health_care' => 'home_health_care',
         'hospice_service' => 'hospice_service',
+        'hsa_eligible' => 'hsa_eligible',
         'id' => 'id',
         'imaging' => 'imaging',
         'in_network_ids' => 'in_network_ids',
@@ -318,6 +321,7 @@ class Plan implements ArrayAccess
         'premium' => 'premium',
         'primary_care_physician' => 'primary_care_physician',
         'rehabilitation_services' => 'rehabilitation_services',
+        'service_area_id' => 'service_area_id',
         'skilled_nursing' => 'skilled_nursing',
         'specialist' => 'specialist',
         'specialty_drugs' => 'specialty_drugs',
@@ -346,6 +350,7 @@ class Plan implements ArrayAccess
         'customer_service_phone_number' => 'setCustomerServicePhoneNumber',
         'durable_medical_equipment' => 'setDurableMedicalEquipment',
         'diagnostic_test' => 'setDiagnosticTest',
+        'display_name' => 'setDisplayName',
         'dp_rider' => 'setDpRider',
         'drug_formulary_url' => 'setDrugFormularyUrl',
         'effective_date' => 'setEffectiveDate',
@@ -361,6 +366,7 @@ class Plan implements ArrayAccess
         'hios_issuer_id' => 'setHiosIssuerId',
         'home_health_care' => 'setHomeHealthCare',
         'hospice_service' => 'setHospiceService',
+        'hsa_eligible' => 'setHsaEligible',
         'id' => 'setId',
         'imaging' => 'setImaging',
         'in_network_ids' => 'setInNetworkIds',
@@ -395,6 +401,7 @@ class Plan implements ArrayAccess
         'premium' => 'setPremium',
         'primary_care_physician' => 'setPrimaryCarePhysician',
         'rehabilitation_services' => 'setRehabilitationServices',
+        'service_area_id' => 'setServiceAreaId',
         'skilled_nursing' => 'setSkilledNursing',
         'specialist' => 'setSpecialist',
         'specialty_drugs' => 'setSpecialtyDrugs',
@@ -423,6 +430,7 @@ class Plan implements ArrayAccess
         'customer_service_phone_number' => 'getCustomerServicePhoneNumber',
         'durable_medical_equipment' => 'getDurableMedicalEquipment',
         'diagnostic_test' => 'getDiagnosticTest',
+        'display_name' => 'getDisplayName',
         'dp_rider' => 'getDpRider',
         'drug_formulary_url' => 'getDrugFormularyUrl',
         'effective_date' => 'getEffectiveDate',
@@ -438,6 +446,7 @@ class Plan implements ArrayAccess
         'hios_issuer_id' => 'getHiosIssuerId',
         'home_health_care' => 'getHomeHealthCare',
         'hospice_service' => 'getHospiceService',
+        'hsa_eligible' => 'getHsaEligible',
         'id' => 'getId',
         'imaging' => 'getImaging',
         'in_network_ids' => 'getInNetworkIds',
@@ -472,6 +481,7 @@ class Plan implements ArrayAccess
         'premium' => 'getPremium',
         'primary_care_physician' => 'getPrimaryCarePhysician',
         'rehabilitation_services' => 'getRehabilitationServices',
+        'service_area_id' => 'getServiceAreaId',
         'skilled_nursing' => 'getSkilledNursing',
         'specialist' => 'getSpecialist',
         'specialty_drugs' => 'getSpecialtyDrugs',
@@ -511,6 +521,7 @@ class Plan implements ArrayAccess
         $this->container['customer_service_phone_number'] = isset($data['customer_service_phone_number']) ? $data['customer_service_phone_number'] : null;
         $this->container['durable_medical_equipment'] = isset($data['durable_medical_equipment']) ? $data['durable_medical_equipment'] : null;
         $this->container['diagnostic_test'] = isset($data['diagnostic_test']) ? $data['diagnostic_test'] : null;
+        $this->container['display_name'] = isset($data['display_name']) ? $data['display_name'] : null;
         $this->container['dp_rider'] = isset($data['dp_rider']) ? $data['dp_rider'] : null;
         $this->container['drug_formulary_url'] = isset($data['drug_formulary_url']) ? $data['drug_formulary_url'] : null;
         $this->container['effective_date'] = isset($data['effective_date']) ? $data['effective_date'] : null;
@@ -526,6 +537,7 @@ class Plan implements ArrayAccess
         $this->container['hios_issuer_id'] = isset($data['hios_issuer_id']) ? $data['hios_issuer_id'] : null;
         $this->container['home_health_care'] = isset($data['home_health_care']) ? $data['home_health_care'] : null;
         $this->container['hospice_service'] = isset($data['hospice_service']) ? $data['hospice_service'] : null;
+        $this->container['hsa_eligible'] = isset($data['hsa_eligible']) ? $data['hsa_eligible'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['imaging'] = isset($data['imaging']) ? $data['imaging'] : null;
         $this->container['in_network_ids'] = isset($data['in_network_ids']) ? $data['in_network_ids'] : null;
@@ -560,6 +572,7 @@ class Plan implements ArrayAccess
         $this->container['premium'] = isset($data['premium']) ? $data['premium'] : null;
         $this->container['primary_care_physician'] = isset($data['primary_care_physician']) ? $data['primary_care_physician'] : null;
         $this->container['rehabilitation_services'] = isset($data['rehabilitation_services']) ? $data['rehabilitation_services'] : null;
+        $this->container['service_area_id'] = isset($data['service_area_id']) ? $data['service_area_id'] : null;
         $this->container['skilled_nursing'] = isset($data['skilled_nursing']) ? $data['skilled_nursing'] : null;
         $this->container['specialist'] = isset($data['specialist']) ? $data['specialist'] : null;
         $this->container['specialty_drugs'] = isset($data['specialty_drugs']) ? $data['specialty_drugs'] : null;
@@ -837,6 +850,27 @@ class Plan implements ArrayAccess
     public function setDiagnosticTest($diagnostic_test)
     {
         $this->container['diagnostic_test'] = $diagnostic_test;
+
+        return $this;
+    }
+
+    /**
+     * Gets display_name
+     * @return string
+     */
+    public function getDisplayName()
+    {
+        return $this->container['display_name'];
+    }
+
+    /**
+     * Sets display_name
+     * @param string $display_name Alternate name for the Plan
+     * @return $this
+     */
+    public function setDisplayName($display_name)
+    {
+        $this->container['display_name'] = $display_name;
 
         return $this;
     }
@@ -1152,6 +1186,27 @@ class Plan implements ArrayAccess
     public function setHospiceService($hospice_service)
     {
         $this->container['hospice_service'] = $hospice_service;
+
+        return $this;
+    }
+
+    /**
+     * Gets hsa_eligible
+     * @return bool
+     */
+    public function getHsaEligible()
+    {
+        return $this->container['hsa_eligible'];
+    }
+
+    /**
+     * Sets hsa_eligible
+     * @param bool $hsa_eligible Is the plan HSA eligible?
+     * @return $this
+     */
+    public function setHsaEligible($hsa_eligible)
+    {
+        $this->container['hsa_eligible'] = $hsa_eligible;
 
         return $this;
     }
@@ -1866,6 +1921,27 @@ class Plan implements ArrayAccess
     public function setRehabilitationServices($rehabilitation_services)
     {
         $this->container['rehabilitation_services'] = $rehabilitation_services;
+
+        return $this;
+    }
+
+    /**
+     * Gets service_area_id
+     * @return string
+     */
+    public function getServiceAreaId()
+    {
+        return $this->container['service_area_id'];
+    }
+
+    /**
+     * Sets service_area_id
+     * @param string $service_area_id Foreign key for service area
+     * @return $this
+     */
+    public function setServiceAreaId($service_area_id)
+    {
+        $this->container['service_area_id'] = $service_area_id;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * ZipCountyBulk
+ * ServiceArea
  *
  * PHP version 5
  *
@@ -156,7 +156,7 @@ namespace Swagger\Client\Model;
 use \ArrayAccess;
 
 /**
- * ZipCountyBulk Class Doc Comment
+ * ServiceArea Class Doc Comment
  *
  * @category    Class */
 /** 
@@ -165,23 +165,22 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class ZipCountyBulk implements ArrayAccess
+class ServiceArea implements ArrayAccess
 {
     /**
       * The original name of the model.
       * @var string
       */
-    protected static $swaggerModelName = 'ZipCountyBulk';
+    protected static $swaggerModelName = 'ServiceArea';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     protected static $swaggerTypes = array(
-        'id' => 'int',
-        'rating_area_id' => 'string',
-        'county_id' => 'string',
-        'zip_code_id' => 'string'
+        'id' => 'string',
+        'issuer_id' => 'string',
+        'name' => 'string'
     );
 
     public static function swaggerTypes()
@@ -195,9 +194,8 @@ class ZipCountyBulk implements ArrayAccess
      */
     protected static $attributeMap = array(
         'id' => 'id',
-        'rating_area_id' => 'rating_area_id',
-        'county_id' => 'county_id',
-        'zip_code_id' => 'zip_code_id'
+        'issuer_id' => 'issuer_id',
+        'name' => 'name'
     );
 
     public static function attributeMap()
@@ -211,9 +209,8 @@ class ZipCountyBulk implements ArrayAccess
      */
     protected static $setters = array(
         'id' => 'setId',
-        'rating_area_id' => 'setRatingAreaId',
-        'county_id' => 'setCountyId',
-        'zip_code_id' => 'setZipCodeId'
+        'issuer_id' => 'setIssuerId',
+        'name' => 'setName'
     );
 
     public static function setters()
@@ -227,9 +224,8 @@ class ZipCountyBulk implements ArrayAccess
      */
     protected static $getters = array(
         'id' => 'getId',
-        'rating_area_id' => 'getRatingAreaId',
-        'county_id' => 'getCountyId',
-        'zip_code_id' => 'getZipCodeId'
+        'issuer_id' => 'getIssuerId',
+        'name' => 'getName'
     );
 
     public static function getters()
@@ -254,9 +250,8 @@ class ZipCountyBulk implements ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['rating_area_id'] = isset($data['rating_area_id']) ? $data['rating_area_id'] : null;
-        $this->container['county_id'] = isset($data['county_id']) ? $data['county_id'] : null;
-        $this->container['zip_code_id'] = isset($data['zip_code_id']) ? $data['zip_code_id'] : null;
+        $this->container['issuer_id'] = isset($data['issuer_id']) ? $data['issuer_id'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
     }
 
     /**
@@ -284,7 +279,7 @@ class ZipCountyBulk implements ArrayAccess
 
     /**
      * Gets id
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -293,7 +288,7 @@ class ZipCountyBulk implements ArrayAccess
 
     /**
      * Sets id
-     * @param int $id Primary key
+     * @param string $id Primary key
      * @return $this
      */
     public function setId($id)
@@ -304,64 +299,43 @@ class ZipCountyBulk implements ArrayAccess
     }
 
     /**
-     * Gets rating_area_id
+     * Gets issuer_id
      * @return string
      */
-    public function getRatingAreaId()
+    public function getIssuerId()
     {
-        return $this->container['rating_area_id'];
+        return $this->container['issuer_id'];
     }
 
     /**
-     * Sets rating_area_id
-     * @param string $rating_area_id Foreign key for rating area
+     * Sets issuer_id
+     * @param string $issuer_id Issuer foreign key
      * @return $this
      */
-    public function setRatingAreaId($rating_area_id)
+    public function setIssuerId($issuer_id)
     {
-        $this->container['rating_area_id'] = $rating_area_id;
+        $this->container['issuer_id'] = $issuer_id;
 
         return $this;
     }
 
     /**
-     * Gets county_id
+     * Gets name
      * @return string
      */
-    public function getCountyId()
+    public function getName()
     {
-        return $this->container['county_id'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets county_id
-     * @param string $county_id Foreign key for county (fips code)
+     * Sets name
+     * @param string $name Name of the Service Area
      * @return $this
      */
-    public function setCountyId($county_id)
+    public function setName($name)
     {
-        $this->container['county_id'] = $county_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets zip_code_id
-     * @return string
-     */
-    public function getZipCodeId()
-    {
-        return $this->container['zip_code_id'];
-    }
-
-    /**
-     * Sets zip_code_id
-     * @param string $zip_code_id Foreign key for zip code (zip code)
-     * @return $this
-     */
-    public function setZipCodeId($zip_code_id)
-    {
-        $this->container['zip_code_id'] = $zip_code_id;
+        $this->container['name'] = $name;
 
         return $this;
     }
