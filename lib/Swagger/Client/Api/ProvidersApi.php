@@ -217,38 +217,37 @@ class ProvidersApi
     /**
      * Operation getProvider
      *
-     * Find a Provider.
-     */
-   //  * @param string $npi NPI number (required)
-    /**
+     * Find a Provider
+     *
+     * @param string $npi NPI number (required)
+     * @param string $year Only show plan ids for the given year (optional)
+     * @param string $state Only show plan ids for the given state (optional)
      * @return \Swagger\Client\Model\ProviderShowResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function getProvider($npi)
+    public function getProvider($npi, $year = null, $state = null)
     {
-        list($response) = $this->getProviderWithHttpInfo($npi);
+        list($response) = $this->getProviderWithHttpInfo($npi, $year, $state);
         return $response;
     }
-
 
     /**
      * Operation getProviderWithHttpInfo
      *
-     * Find a Provider.
-     */
-   //  * @param string $npi NPI number (required)
-    /**
+     * Find a Provider
+     *
+     * @param string $npi NPI number (required)
+     * @param string $year Only show plan ids for the given year (optional)
+     * @param string $state Only show plan ids for the given state (optional)
      * @return Array of \Swagger\Client\Model\ProviderShowResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function getProviderWithHttpInfo($npi)
+    public function getProviderWithHttpInfo($npi, $year = null, $state = null)
     {
-        
         // verify the required parameter 'npi' is set
         if ($npi === null) {
             throw new \InvalidArgumentException('Missing the required parameter $npi when calling getProvider');
         }
-
         // parse inputs
         $resourcePath = "/providers/{npi}";
         $httpBody = '';
@@ -261,8 +260,14 @@ class ProvidersApi
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(array());
 
-        
-        
+        // query params
+        if ($year !== null) {
+            $queryParams['year'] = $this->apiClient->getSerializer()->toQueryValue($year);
+        }
+        // query params
+        if ($state !== null) {
+            $queryParams['state'] = $this->apiClient->getSerializer()->toQueryValue($state);
+        }
         // path params
         if ($npi !== null) {
             $resourcePath = str_replace(
@@ -275,21 +280,17 @@ class ProvidersApi
         $resourcePath = str_replace("{format}", "json", $resourcePath);
 
         
-        
-
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
         } elseif (count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
-        
         // this endpoint requires API key authentication
         $apiKey = $this->apiClient->getApiKeyWithPrefix('Vericred-Api-Key');
         if (strlen($apiKey) !== 0) {
             $headerParams['Vericred-Api-Key'] = $apiKey;
         }
-        
         // make the API Call
         try {
             list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
@@ -298,7 +299,8 @@ class ProvidersApi
                 $queryParams,
                 $httpBody,
                 $headerParams,
-                '\Swagger\Client\Model\ProviderShowResponse'
+                '\Swagger\Client\Model\ProviderShowResponse',
+                '/providers/{npi}'
             );
 
             return array($this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\ProviderShowResponse', $httpHeader), $statusCode, $httpHeader);
@@ -313,13 +315,13 @@ class ProvidersApi
             throw $e;
         }
     }
+
     /**
      * Operation getProviders
      *
-     * Find Providers.
-     */
-   //  * @param \Swagger\Client\Model\RequestProvidersSearch $body  (optional)
-    /**
+     * Find Providers
+     *
+     * @param \Swagger\Client\Model\RequestProvidersSearch $body  (optional)
      * @return \Swagger\Client\Model\ProvidersSearchResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
@@ -329,20 +331,17 @@ class ProvidersApi
         return $response;
     }
 
-
     /**
      * Operation getProvidersWithHttpInfo
      *
-     * Find Providers.
-     */
-   //  * @param \Swagger\Client\Model\RequestProvidersSearch $body  (optional)
-    /**
+     * Find Providers
+     *
+     * @param \Swagger\Client\Model\RequestProvidersSearch $body  (optional)
      * @return Array of \Swagger\Client\Model\ProvidersSearchResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
     public function getProvidersWithHttpInfo($body = null)
     {
-        
         // parse inputs
         $resourcePath = "/providers/search";
         $httpBody = '';
@@ -355,13 +354,9 @@ class ProvidersApi
         }
         $headerParams['Content-Type'] = $this->apiClient->selectHeaderContentType(array());
 
-        
-        
-        
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
 
-        
         // body params
         $_tempBody = null;
         if (isset($body)) {
@@ -374,13 +369,11 @@ class ProvidersApi
         } elseif (count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
-        
         // this endpoint requires API key authentication
         $apiKey = $this->apiClient->getApiKeyWithPrefix('Vericred-Api-Key');
         if (strlen($apiKey) !== 0) {
             $headerParams['Vericred-Api-Key'] = $apiKey;
         }
-        
         // make the API Call
         try {
             list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
@@ -389,7 +382,8 @@ class ProvidersApi
                 $queryParams,
                 $httpBody,
                 $headerParams,
-                '\Swagger\Client\Model\ProvidersSearchResponse'
+                '\Swagger\Client\Model\ProvidersSearchResponse',
+                '/providers/search'
             );
 
             return array($this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\ProvidersSearchResponse', $httpHeader), $statusCode, $httpHeader);
@@ -404,4 +398,5 @@ class ProvidersApi
             throw $e;
         }
     }
+
 }

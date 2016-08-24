@@ -304,6 +304,14 @@ class PlanSearchResultTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "display_name"
+     */
+    public function testPropertyDisplayName()
+    {
+
+    }
+
+    /**
      * Test attribute "dp_rider"
      */
     public function testPropertyDpRider()
@@ -419,6 +427,14 @@ class PlanSearchResultTest extends \PHPUnit_Framework_TestCase
      * Test attribute "hospice_service"
      */
     public function testPropertyHospiceService()
+    {
+
+    }
+
+    /**
+     * Test attribute "hsa_eligible"
+     */
+    public function testPropertyHsaEligible()
     {
 
     }
@@ -683,6 +699,14 @@ class PlanSearchResultTest extends \PHPUnit_Framework_TestCase
      * Test attribute "rehabilitation_services"
      */
     public function testPropertyRehabilitationServices()
+    {
+
+    }
+
+    /**
+     * Test attribute "service_area_id"
+     */
+    public function testPropertyServiceAreaId()
     {
 
     }

@@ -217,12 +217,11 @@ class DrugsApi
     /**
      * Operation getDrugCoverages
      *
-     * Search for DrugCoverages.
-     */
-   //  * @param string $ndc_package_code NDC package code (required)
- //  * @param string $audience Two-character state code (required)
- //  * @param string $state_code Two-character state code (required)
-    /**
+     * Search for DrugCoverages
+     *
+     * @param string $ndc_package_code NDC package code (required)
+     * @param string $audience Two-character state code (required)
+     * @param string $state_code Two-character state code (required)
      * @return \Swagger\Client\Model\DrugCoverageResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
@@ -232,37 +231,31 @@ class DrugsApi
         return $response;
     }
 
-
     /**
      * Operation getDrugCoveragesWithHttpInfo
      *
-     * Search for DrugCoverages.
-     */
-   //  * @param string $ndc_package_code NDC package code (required)
- //  * @param string $audience Two-character state code (required)
- //  * @param string $state_code Two-character state code (required)
-    /**
+     * Search for DrugCoverages
+     *
+     * @param string $ndc_package_code NDC package code (required)
+     * @param string $audience Two-character state code (required)
+     * @param string $state_code Two-character state code (required)
      * @return Array of \Swagger\Client\Model\DrugCoverageResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
     public function getDrugCoveragesWithHttpInfo($ndc_package_code, $audience, $state_code)
     {
-        
         // verify the required parameter 'ndc_package_code' is set
         if ($ndc_package_code === null) {
             throw new \InvalidArgumentException('Missing the required parameter $ndc_package_code when calling getDrugCoverages');
         }
-
         // verify the required parameter 'audience' is set
         if ($audience === null) {
             throw new \InvalidArgumentException('Missing the required parameter $audience when calling getDrugCoverages');
         }
-
         // verify the required parameter 'state_code' is set
         if ($state_code === null) {
             throw new \InvalidArgumentException('Missing the required parameter $state_code when calling getDrugCoverages');
         }
-
         // parse inputs
         $resourcePath = "/drug_packages/{ndc_package_code}/coverages";
         $httpBody = '';
@@ -278,11 +271,11 @@ class DrugsApi
         // query params
         if ($audience !== null) {
             $queryParams['audience'] = $this->apiClient->getSerializer()->toQueryValue($audience);
-        }// query params
+        }
+        // query params
         if ($state_code !== null) {
             $queryParams['state_code'] = $this->apiClient->getSerializer()->toQueryValue($state_code);
         }
-        
         // path params
         if ($ndc_package_code !== null) {
             $resourcePath = str_replace(
@@ -295,21 +288,17 @@ class DrugsApi
         $resourcePath = str_replace("{format}", "json", $resourcePath);
 
         
-        
-
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
         } elseif (count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
-        
         // this endpoint requires API key authentication
         $apiKey = $this->apiClient->getApiKeyWithPrefix('Vericred-Api-Key');
         if (strlen($apiKey) !== 0) {
             $headerParams['Vericred-Api-Key'] = $apiKey;
         }
-        
         // make the API Call
         try {
             list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
@@ -318,7 +307,8 @@ class DrugsApi
                 $queryParams,
                 $httpBody,
                 $headerParams,
-                '\Swagger\Client\Model\DrugCoverageResponse'
+                '\Swagger\Client\Model\DrugCoverageResponse',
+                '/drug_packages/{ndc_package_code}/coverages'
             );
 
             return array($this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\DrugCoverageResponse', $httpHeader), $statusCode, $httpHeader);
@@ -333,13 +323,13 @@ class DrugsApi
             throw $e;
         }
     }
+
     /**
      * Operation listDrugs
      *
-     * Drug Search.
-     */
-   //  * @param string $search_term Full or partial proprietary name of drug (required)
-    /**
+     * Drug Search
+     *
+     * @param string $search_term Full or partial proprietary name of drug (required)
      * @return \Swagger\Client\Model\DrugSearchResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
@@ -349,25 +339,21 @@ class DrugsApi
         return $response;
     }
 
-
     /**
      * Operation listDrugsWithHttpInfo
      *
-     * Drug Search.
-     */
-   //  * @param string $search_term Full or partial proprietary name of drug (required)
-    /**
+     * Drug Search
+     *
+     * @param string $search_term Full or partial proprietary name of drug (required)
      * @return Array of \Swagger\Client\Model\DrugSearchResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
     public function listDrugsWithHttpInfo($search_term)
     {
-        
         // verify the required parameter 'search_term' is set
         if ($search_term === null) {
             throw new \InvalidArgumentException('Missing the required parameter $search_term when calling listDrugs');
         }
-
         // parse inputs
         $resourcePath = "/drugs";
         $httpBody = '';
@@ -384,27 +370,21 @@ class DrugsApi
         if ($search_term !== null) {
             $queryParams['search_term'] = $this->apiClient->getSerializer()->toQueryValue($search_term);
         }
-        
-        
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
 
         
-        
-
         // for model (json/xml)
         if (isset($_tempBody)) {
             $httpBody = $_tempBody; // $_tempBody is the method argument, if present
         } elseif (count($formParams) > 0) {
             $httpBody = $formParams; // for HTTP post (form)
         }
-        
         // this endpoint requires API key authentication
         $apiKey = $this->apiClient->getApiKeyWithPrefix('Vericred-Api-Key');
         if (strlen($apiKey) !== 0) {
             $headerParams['Vericred-Api-Key'] = $apiKey;
         }
-        
         // make the API Call
         try {
             list($response, $statusCode, $httpHeader) = $this->apiClient->callApi(
@@ -413,7 +393,8 @@ class DrugsApi
                 $queryParams,
                 $httpBody,
                 $headerParams,
-                '\Swagger\Client\Model\DrugSearchResponse'
+                '\Swagger\Client\Model\DrugSearchResponse',
+                '/drugs'
             );
 
             return array($this->apiClient->getSerializer()->deserialize($response, '\Swagger\Client\Model\DrugSearchResponse', $httpHeader), $statusCode, $httpHeader);
@@ -428,4 +409,5 @@ class DrugsApi
             throw $e;
         }
     }
+
 }

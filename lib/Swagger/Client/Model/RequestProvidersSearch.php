@@ -155,8 +155,6 @@ namespace Swagger\Client\Model;
 
 use \ArrayAccess;
 
-
-
 /**
  * RequestProvidersSearch Class Doc Comment
  *
@@ -182,6 +180,7 @@ class RequestProvidersSearch implements ArrayAccess
     protected static $swaggerTypes = array(
         'accepts_insurance' => 'bool',
         'hios_ids' => 'string[]',
+        'min_score' => 'float',
         'page' => 'int',
         'per_page' => 'int',
         'radius' => 'int',
@@ -202,6 +201,7 @@ class RequestProvidersSearch implements ArrayAccess
     protected static $attributeMap = array(
         'accepts_insurance' => 'accepts_insurance',
         'hios_ids' => 'hios_ids',
+        'min_score' => 'min_score',
         'page' => 'page',
         'per_page' => 'per_page',
         'radius' => 'radius',
@@ -222,6 +222,7 @@ class RequestProvidersSearch implements ArrayAccess
     protected static $setters = array(
         'accepts_insurance' => 'setAcceptsInsurance',
         'hios_ids' => 'setHiosIds',
+        'min_score' => 'setMinScore',
         'page' => 'setPage',
         'per_page' => 'setPerPage',
         'radius' => 'setRadius',
@@ -242,6 +243,7 @@ class RequestProvidersSearch implements ArrayAccess
     protected static $getters = array(
         'accepts_insurance' => 'getAcceptsInsurance',
         'hios_ids' => 'getHiosIds',
+        'min_score' => 'getMinScore',
         'page' => 'getPage',
         'per_page' => 'getPerPage',
         'radius' => 'getRadius',
@@ -273,6 +275,7 @@ class RequestProvidersSearch implements ArrayAccess
     {
         $this->container['accepts_insurance'] = isset($data['accepts_insurance']) ? $data['accepts_insurance'] : null;
         $this->container['hios_ids'] = isset($data['hios_ids']) ? $data['hios_ids'] : null;
+        $this->container['min_score'] = isset($data['min_score']) ? $data['min_score'] : null;
         $this->container['page'] = isset($data['page']) ? $data['page'] : null;
         $this->container['per_page'] = isset($data['per_page']) ? $data['per_page'] : null;
         $this->container['radius'] = isset($data['radius']) ? $data['radius'] : null;
@@ -342,6 +345,27 @@ class RequestProvidersSearch implements ArrayAccess
     public function setHiosIds($hios_ids)
     {
         $this->container['hios_ids'] = $hios_ids;
+
+        return $this;
+    }
+
+    /**
+     * Gets min_score
+     * @return float
+     */
+    public function getMinScore()
+    {
+        return $this->container['min_score'];
+    }
+
+    /**
+     * Sets min_score
+     * @param float $min_score Minimum search threshold to be included in the results
+     * @return $this
+     */
+    public function setMinScore($min_score)
+    {
+        $this->container['min_score'] = $min_score;
 
         return $this;
     }

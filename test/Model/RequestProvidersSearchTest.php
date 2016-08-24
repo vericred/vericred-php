@@ -224,6 +224,14 @@ class RequestProvidersSearchTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "min_score"
+     */
+    public function testPropertyMinScore()
+    {
+
+    }
+
+    /**
      * Test attribute "page"
      */
     public function testPropertyPage()

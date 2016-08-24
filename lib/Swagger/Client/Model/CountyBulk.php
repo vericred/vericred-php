@@ -155,8 +155,6 @@ namespace Swagger\Client\Model;
 
 use \ArrayAccess;
 
-
-
 /**
  * CountyBulk Class Doc Comment
  *
@@ -182,7 +180,9 @@ class CountyBulk implements ArrayAccess
     protected static $swaggerTypes = array(
         'id' => 'string',
         'name' => 'string',
-        'state_id' => 'string'
+        'state_id' => 'string',
+        'rating_area_count' => 'string',
+        'service_area_count' => 'string'
     );
 
     public static function swaggerTypes()
@@ -197,7 +197,9 @@ class CountyBulk implements ArrayAccess
     protected static $attributeMap = array(
         'id' => 'id',
         'name' => 'name',
-        'state_id' => 'state_id'
+        'state_id' => 'state_id',
+        'rating_area_count' => 'rating_area_count',
+        'service_area_count' => 'service_area_count'
     );
 
     public static function attributeMap()
@@ -212,7 +214,9 @@ class CountyBulk implements ArrayAccess
     protected static $setters = array(
         'id' => 'setId',
         'name' => 'setName',
-        'state_id' => 'setStateId'
+        'state_id' => 'setStateId',
+        'rating_area_count' => 'setRatingAreaCount',
+        'service_area_count' => 'setServiceAreaCount'
     );
 
     public static function setters()
@@ -227,7 +231,9 @@ class CountyBulk implements ArrayAccess
     protected static $getters = array(
         'id' => 'getId',
         'name' => 'getName',
-        'state_id' => 'getStateId'
+        'state_id' => 'getStateId',
+        'rating_area_count' => 'getRatingAreaCount',
+        'service_area_count' => 'getServiceAreaCount'
     );
 
     public static function getters()
@@ -254,6 +260,8 @@ class CountyBulk implements ArrayAccess
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['state_id'] = isset($data['state_id']) ? $data['state_id'] : null;
+        $this->container['rating_area_count'] = isset($data['rating_area_count']) ? $data['rating_area_count'] : null;
+        $this->container['service_area_count'] = isset($data['service_area_count']) ? $data['service_area_count'] : null;
     }
 
     /**
@@ -338,6 +346,48 @@ class CountyBulk implements ArrayAccess
     public function setStateId($state_id)
     {
         $this->container['state_id'] = $state_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets rating_area_count
+     * @return string
+     */
+    public function getRatingAreaCount()
+    {
+        return $this->container['rating_area_count'];
+    }
+
+    /**
+     * Sets rating_area_count
+     * @param string $rating_area_count Count of unique rating areas in the county
+     * @return $this
+     */
+    public function setRatingAreaCount($rating_area_count)
+    {
+        $this->container['rating_area_count'] = $rating_area_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets service_area_count
+     * @return string
+     */
+    public function getServiceAreaCount()
+    {
+        return $this->container['service_area_count'];
+    }
+
+    /**
+     * Sets service_area_count
+     * @param string $service_area_count Count of unique service areas in the county
+     * @return $this
+     */
+    public function setServiceAreaCount($service_area_count)
+    {
+        $this->container['service_area_count'] = $service_area_count;
 
         return $this;
     }
