@@ -220,7 +220,7 @@ class DrugsApi
      * Search for DrugCoverages
      *
      * @param string $ndc_package_code NDC package code (required)
-     * @param string $audience Two-character state code (required)
+     * @param string $audience Plan Audience (individual or small_group) (required)
      * @param string $state_code Two-character state code (required)
      * @return \Swagger\Client\Model\DrugCoverageResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
@@ -237,9 +237,9 @@ class DrugsApi
      * Search for DrugCoverages
      *
      * @param string $ndc_package_code NDC package code (required)
-     * @param string $audience Two-character state code (required)
+     * @param string $audience Plan Audience (individual or small_group) (required)
      * @param string $state_code Two-character state code (required)
-     * @return Array of \Swagger\Client\Model\DrugCoverageResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Swagger\Client\Model\DrugCoverageResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
     public function getDrugCoveragesWithHttpInfo($ndc_package_code, $audience, $state_code)
@@ -345,7 +345,7 @@ class DrugsApi
      * Drug Search
      *
      * @param string $search_term Full or partial proprietary name of drug (required)
-     * @return Array of \Swagger\Client\Model\DrugSearchResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Swagger\Client\Model\DrugSearchResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
     public function listDrugsWithHttpInfo($search_term)

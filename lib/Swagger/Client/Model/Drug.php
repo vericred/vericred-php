@@ -179,6 +179,7 @@ class Drug implements ArrayAccess
       */
     protected static $swaggerTypes = array(
         'id' => 'string',
+        'active_ingredient_strength' => 'string',
         'proprietary_name' => 'string',
         'non_proprietary_name' => 'string',
         'drug_package_ids' => 'string[]'
@@ -195,6 +196,7 @@ class Drug implements ArrayAccess
      */
     protected static $attributeMap = array(
         'id' => 'id',
+        'active_ingredient_strength' => 'active_ingredient_strength',
         'proprietary_name' => 'proprietary_name',
         'non_proprietary_name' => 'non_proprietary_name',
         'drug_package_ids' => 'drug_package_ids'
@@ -211,6 +213,7 @@ class Drug implements ArrayAccess
      */
     protected static $setters = array(
         'id' => 'setId',
+        'active_ingredient_strength' => 'setActiveIngredientStrength',
         'proprietary_name' => 'setProprietaryName',
         'non_proprietary_name' => 'setNonProprietaryName',
         'drug_package_ids' => 'setDrugPackageIds'
@@ -227,6 +230,7 @@ class Drug implements ArrayAccess
      */
     protected static $getters = array(
         'id' => 'getId',
+        'active_ingredient_strength' => 'getActiveIngredientStrength',
         'proprietary_name' => 'getProprietaryName',
         'non_proprietary_name' => 'getNonProprietaryName',
         'drug_package_ids' => 'getDrugPackageIds'
@@ -249,11 +253,12 @@ class Drug implements ArrayAccess
 
     /**
      * Constructor
-     * @param mixed[] $data Associated array of property value initalizing the model
+     * @param mixed[] $data Associated array of property values initializing the model
      */
     public function __construct(array $data = null)
     {
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['active_ingredient_strength'] = isset($data['active_ingredient_strength']) ? $data['active_ingredient_strength'] : null;
         $this->container['proprietary_name'] = isset($data['proprietary_name']) ? $data['proprietary_name'] : null;
         $this->container['non_proprietary_name'] = isset($data['non_proprietary_name']) ? $data['non_proprietary_name'] : null;
         $this->container['drug_package_ids'] = isset($data['drug_package_ids']) ? $data['drug_package_ids'] : null;
@@ -299,6 +304,27 @@ class Drug implements ArrayAccess
     public function setId($id)
     {
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets active_ingredient_strength
+     * @return string
+     */
+    public function getActiveIngredientStrength()
+    {
+        return $this->container['active_ingredient_strength'];
+    }
+
+    /**
+     * Sets active_ingredient_strength
+     * @param string $active_ingredient_strength Active Ingredient Strength information
+     * @return $this
+     */
+    public function setActiveIngredientStrength($active_ingredient_strength)
+    {
+        $this->container['active_ingredient_strength'] = $active_ingredient_strength;
 
         return $this;
     }

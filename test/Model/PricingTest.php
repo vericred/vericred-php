@@ -295,4 +295,20 @@ class PricingTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * Test attribute "premium_source"
+     */
+    public function testPropertyPremiumSource()
+    {
+
+    }
+
+    /**
+     * Test attribute "updated_at"
+     */
+    public function testPropertyUpdatedAt()
+    {
+
+    }
+
 }

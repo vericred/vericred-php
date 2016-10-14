@@ -280,14 +280,6 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "hios_ids"
-     */
-    public function testPropertyHiosIds()
-    {
-
-    }
-
-    /**
      * Test attribute "id"
      */
     public function testPropertyId()
@@ -331,6 +323,14 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
      * Test attribute "network_ids"
      */
     public function testPropertyNetworkIds()
+    {
+
+    }
+
+    /**
+     * Test attribute "organization_name"
+     */
+    public function testPropertyOrganizationName()
     {
 
     }

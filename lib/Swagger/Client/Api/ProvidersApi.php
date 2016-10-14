@@ -239,7 +239,7 @@ class ProvidersApi
      * @param string $npi NPI number (required)
      * @param string $year Only show plan ids for the given year (optional)
      * @param string $state Only show plan ids for the given state (optional)
-     * @return Array of \Swagger\Client\Model\ProviderShowResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Swagger\Client\Model\ProviderShowResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
     public function getProviderWithHttpInfo($npi, $year = null, $state = null)
@@ -321,11 +321,11 @@ class ProvidersApi
      *
      * Find Providers
      *
-     * @param \Swagger\Client\Model\RequestProvidersSearch $body  (optional)
+     * @param \Swagger\Client\Model\RequestProvidersSearch $body  (required)
      * @return \Swagger\Client\Model\ProvidersSearchResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function getProviders($body = null)
+    public function getProviders($body)
     {
         list($response) = $this->getProvidersWithHttpInfo($body);
         return $response;
@@ -336,12 +336,16 @@ class ProvidersApi
      *
      * Find Providers
      *
-     * @param \Swagger\Client\Model\RequestProvidersSearch $body  (optional)
-     * @return Array of \Swagger\Client\Model\ProvidersSearchResponse, HTTP status code, HTTP response headers (array of strings)
+     * @param \Swagger\Client\Model\RequestProvidersSearch $body  (required)
+     * @return array of \Swagger\Client\Model\ProvidersSearchResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function getProvidersWithHttpInfo($body = null)
+    public function getProvidersWithHttpInfo($body)
     {
+        // verify the required parameter 'body' is set
+        if ($body === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling getProviders');
+        }
         // parse inputs
         $resourcePath = "/providers/search";
         $httpBody = '';

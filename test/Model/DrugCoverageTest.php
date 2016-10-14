@@ -224,9 +224,9 @@ class DrugCoverageTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "tier"
+     * Test attribute "med_id"
      */
-    public function testPropertyTier()
+    public function testPropertyMedId()
     {
 
     }
@@ -251,6 +251,14 @@ class DrugCoverageTest extends \PHPUnit_Framework_TestCase
      * Test attribute "step_therapy"
      */
     public function testPropertyStepTherapy()
+    {
+
+    }
+
+    /**
+     * Test attribute "tier"
+     */
+    public function testPropertyTier()
     {
 
     }

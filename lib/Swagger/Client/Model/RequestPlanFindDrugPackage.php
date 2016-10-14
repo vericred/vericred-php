@@ -178,7 +178,8 @@ class RequestPlanFindDrugPackage implements ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = array(
-        'id' => 'string'
+        'id' => 'string',
+        'med_id' => 'int'
     );
 
     public static function swaggerTypes()
@@ -191,7 +192,8 @@ class RequestPlanFindDrugPackage implements ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = array(
-        'id' => 'id'
+        'id' => 'id',
+        'med_id' => 'med_id'
     );
 
     public static function attributeMap()
@@ -204,7 +206,8 @@ class RequestPlanFindDrugPackage implements ArrayAccess
      * @var string[]
      */
     protected static $setters = array(
-        'id' => 'setId'
+        'id' => 'setId',
+        'med_id' => 'setMedId'
     );
 
     public static function setters()
@@ -217,7 +220,8 @@ class RequestPlanFindDrugPackage implements ArrayAccess
      * @var string[]
      */
     protected static $getters = array(
-        'id' => 'getId'
+        'id' => 'getId',
+        'med_id' => 'getMedId'
     );
 
     public static function getters()
@@ -237,11 +241,12 @@ class RequestPlanFindDrugPackage implements ArrayAccess
 
     /**
      * Constructor
-     * @param mixed[] $data Associated array of property value initalizing the model
+     * @param mixed[] $data Associated array of property values initializing the model
      */
     public function __construct(array $data = null)
     {
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['med_id'] = isset($data['med_id']) ? $data['med_id'] : null;
     }
 
     /**
@@ -284,6 +289,27 @@ class RequestPlanFindDrugPackage implements ArrayAccess
     public function setId($id)
     {
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets med_id
+     * @return int
+     */
+    public function getMedId()
+    {
+        return $this->container['med_id'];
+    }
+
+    /**
+     * Sets med_id
+     * @param int $med_id Med ID, mutually exclusive with id
+     * @return $this
+     */
+    public function setMedId($med_id)
+    {
+        $this->container['med_id'] = $med_id;
 
         return $this;
     }

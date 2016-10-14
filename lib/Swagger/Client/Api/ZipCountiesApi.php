@@ -235,7 +235,7 @@ class ZipCountiesApi
      * Search for Zip Counties
      *
      * @param string $zip_prefix Partial five-digit Zip (required)
-     * @return Array of \Swagger\Client\Model\ZipCountyResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Swagger\Client\Model\ZipCountyResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
     public function getZipCountiesWithHttpInfo($zip_prefix)

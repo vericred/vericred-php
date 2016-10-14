@@ -219,11 +219,11 @@ class PlansApi
      *
      * Find Plans
      *
-     * @param \Swagger\Client\Model\RequestPlanFind $body  (optional)
+     * @param \Swagger\Client\Model\RequestPlanFind $body  (required)
      * @return \Swagger\Client\Model\PlanSearchResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function findPlans($body = null)
+    public function findPlans($body)
     {
         list($response) = $this->findPlansWithHttpInfo($body);
         return $response;
@@ -234,12 +234,16 @@ class PlansApi
      *
      * Find Plans
      *
-     * @param \Swagger\Client\Model\RequestPlanFind $body  (optional)
-     * @return Array of \Swagger\Client\Model\PlanSearchResponse, HTTP status code, HTTP response headers (array of strings)
+     * @param \Swagger\Client\Model\RequestPlanFind $body  (required)
+     * @return array of \Swagger\Client\Model\PlanSearchResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function findPlansWithHttpInfo($body = null)
+    public function findPlansWithHttpInfo($body)
     {
+        // verify the required parameter 'body' is set
+        if ($body === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $body when calling findPlans');
+        }
         // parse inputs
         $resourcePath = "/plans/search";
         $httpBody = '';
@@ -302,13 +306,14 @@ class PlansApi
      *
      * Show Plan
      *
+     * @param string $id ID of the Plan (required)
      * @param int $year Plan year (defaults to current year) (optional)
      * @return \Swagger\Client\Model\PlanShowResponse
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function showPlan($year = null)
+    public function showPlan($id, $year = null)
     {
-        list($response) = $this->showPlanWithHttpInfo($year);
+        list($response) = $this->showPlanWithHttpInfo($id, $year);
         return $response;
     }
 
@@ -317,12 +322,17 @@ class PlansApi
      *
      * Show Plan
      *
+     * @param string $id ID of the Plan (required)
      * @param int $year Plan year (defaults to current year) (optional)
-     * @return Array of \Swagger\Client\Model\PlanShowResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Swagger\Client\Model\PlanShowResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
-    public function showPlanWithHttpInfo($year = null)
+    public function showPlanWithHttpInfo($id, $year = null)
     {
+        // verify the required parameter 'id' is set
+        if ($id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $id when calling showPlan');
+        }
         // parse inputs
         $resourcePath = "/plans/{id}";
         $httpBody = '';
@@ -338,6 +348,14 @@ class PlansApi
         // query params
         if ($year !== null) {
             $queryParams['year'] = $this->apiClient->getSerializer()->toQueryValue($year);
+        }
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                "{" . "id" . "}",
+                $this->apiClient->getSerializer()->toPathValue($id),
+                $resourcePath
+            );
         }
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);

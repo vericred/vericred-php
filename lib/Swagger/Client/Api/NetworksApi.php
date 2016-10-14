@@ -239,7 +239,7 @@ class NetworksApi
      * @param string $carrier_id Carrier HIOS Issuer ID (required)
      * @param int $page Page of paginated response (optional)
      * @param int $per_page Responses per page (optional)
-     * @return Array of \Swagger\Client\Model\NetworkSearchResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Swagger\Client\Model\NetworkSearchResponse, HTTP status code, HTTP response headers (array of strings)
      * @throws \Vericred\Client\ApiException on non-2xx response
      */
     public function listNetworksWithHttpInfo($carrier_id, $page = null, $per_page = null)
