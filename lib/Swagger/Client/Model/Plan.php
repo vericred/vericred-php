@@ -239,6 +239,7 @@ class Plan implements ArrayAccess
         'preventative_care' => 'string',
         'premium_subsidized' => 'float',
         'premium' => 'float',
+        'premium_source' => 'string',
         'primary_care_physician' => 'string',
         'rehabilitation_services' => 'string',
         'service_area_id' => 'string',
@@ -319,6 +320,7 @@ class Plan implements ArrayAccess
         'preventative_care' => 'preventative_care',
         'premium_subsidized' => 'premium_subsidized',
         'premium' => 'premium',
+        'premium_source' => 'premium_source',
         'primary_care_physician' => 'primary_care_physician',
         'rehabilitation_services' => 'rehabilitation_services',
         'service_area_id' => 'service_area_id',
@@ -399,6 +401,7 @@ class Plan implements ArrayAccess
         'preventative_care' => 'setPreventativeCare',
         'premium_subsidized' => 'setPremiumSubsidized',
         'premium' => 'setPremium',
+        'premium_source' => 'setPremiumSource',
         'primary_care_physician' => 'setPrimaryCarePhysician',
         'rehabilitation_services' => 'setRehabilitationServices',
         'service_area_id' => 'setServiceAreaId',
@@ -479,6 +482,7 @@ class Plan implements ArrayAccess
         'preventative_care' => 'getPreventativeCare',
         'premium_subsidized' => 'getPremiumSubsidized',
         'premium' => 'getPremium',
+        'premium_source' => 'getPremiumSource',
         'primary_care_physician' => 'getPrimaryCarePhysician',
         'rehabilitation_services' => 'getRehabilitationServices',
         'service_area_id' => 'getServiceAreaId',
@@ -505,7 +509,7 @@ class Plan implements ArrayAccess
 
     /**
      * Constructor
-     * @param mixed[] $data Associated array of property value initalizing the model
+     * @param mixed[] $data Associated array of property values initializing the model
      */
     public function __construct(array $data = null)
     {
@@ -570,6 +574,7 @@ class Plan implements ArrayAccess
         $this->container['preventative_care'] = isset($data['preventative_care']) ? $data['preventative_care'] : null;
         $this->container['premium_subsidized'] = isset($data['premium_subsidized']) ? $data['premium_subsidized'] : null;
         $this->container['premium'] = isset($data['premium']) ? $data['premium'] : null;
+        $this->container['premium_source'] = isset($data['premium_source']) ? $data['premium_source'] : null;
         $this->container['primary_care_physician'] = isset($data['primary_care_physician']) ? $data['primary_care_physician'] : null;
         $this->container['rehabilitation_services'] = isset($data['rehabilitation_services']) ? $data['rehabilitation_services'] : null;
         $this->container['service_area_id'] = isset($data['service_area_id']) ? $data['service_area_id'] : null;
@@ -634,7 +639,7 @@ class Plan implements ArrayAccess
 
     /**
      * Sets age29_rider
-     * @param bool $age29_rider 
+     * @param bool $age29_rider True if the plan allows dependents up to age 29
      * @return $this
      */
     public function setAge29Rider($age29_rider)
@@ -886,7 +891,7 @@ class Plan implements ArrayAccess
 
     /**
      * Sets dp_rider
-     * @param bool $dp_rider Is this a domestic plan?
+     * @param bool $dp_rider True if plan does not cover domestic partners
      * @return $this
      */
     public function setDpRider($dp_rider)
@@ -1075,7 +1080,7 @@ class Plan implements ArrayAccess
 
     /**
      * Sets fp_rider
-     * @param bool $fp_rider Is this a family plan?
+     * @param bool $fp_rider True if plan does not cover family planning
      * @return $this
      */
     public function setFpRider($fp_rider)
@@ -1879,6 +1884,27 @@ class Plan implements ArrayAccess
     public function setPremium($premium)
     {
         $this->container['premium'] = $premium;
+
+        return $this;
+    }
+
+    /**
+     * Gets premium_source
+     * @return string
+     */
+    public function getPremiumSource()
+    {
+        return $this->container['premium_source'];
+    }
+
+    /**
+     * Sets premium_source
+     * @param string $premium_source Source of the base pricing data
+     * @return $this
+     */
+    public function setPremiumSource($premium_source)
+    {
+        $this->container['premium_source'] = $premium_source;
 
         return $this;
     }

@@ -216,6 +216,14 @@ class DrugTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "active_ingredient_strength"
+     */
+    public function testPropertyActiveIngredientStrength()
+    {
+
+    }
+
+    /**
      * Test attribute "proprietary_name"
      */
     public function testPropertyProprietaryName()

@@ -179,7 +179,8 @@ class DrugPackage implements ArrayAccess
       */
     protected static $swaggerTypes = array(
         'id' => 'string',
-        'description' => 'string'
+        'description' => 'string',
+        'med_id' => 'int'
     );
 
     public static function swaggerTypes()
@@ -193,7 +194,8 @@ class DrugPackage implements ArrayAccess
      */
     protected static $attributeMap = array(
         'id' => 'id',
-        'description' => 'description'
+        'description' => 'description',
+        'med_id' => 'med_id'
     );
 
     public static function attributeMap()
@@ -207,7 +209,8 @@ class DrugPackage implements ArrayAccess
      */
     protected static $setters = array(
         'id' => 'setId',
-        'description' => 'setDescription'
+        'description' => 'setDescription',
+        'med_id' => 'setMedId'
     );
 
     public static function setters()
@@ -221,7 +224,8 @@ class DrugPackage implements ArrayAccess
      */
     protected static $getters = array(
         'id' => 'getId',
-        'description' => 'getDescription'
+        'description' => 'getDescription',
+        'med_id' => 'getMedId'
     );
 
     public static function getters()
@@ -241,12 +245,13 @@ class DrugPackage implements ArrayAccess
 
     /**
      * Constructor
-     * @param mixed[] $data Associated array of property value initalizing the model
+     * @param mixed[] $data Associated array of property values initializing the model
      */
     public function __construct(array $data = null)
     {
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        $this->container['med_id'] = isset($data['med_id']) ? $data['med_id'] : null;
     }
 
     /**
@@ -310,6 +315,27 @@ class DrugPackage implements ArrayAccess
     public function setDescription($description)
     {
         $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets med_id
+     * @return int
+     */
+    public function getMedId()
+    {
+        return $this->container['med_id'];
+    }
+
+    /**
+     * Sets med_id
+     * @param int $med_id Med ID
+     * @return $this
+     */
+    public function setMedId($med_id)
+    {
+        $this->container['med_id'] = $med_id;
 
         return $this;
     }

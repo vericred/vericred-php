@@ -180,10 +180,11 @@ class DrugCoverage implements ArrayAccess
     protected static $swaggerTypes = array(
         'plan_id' => 'string',
         'drug_package_id' => 'string',
-        'tier' => 'string',
+        'med_id' => 'int',
         'quantity_limit' => 'bool',
         'prior_authorization' => 'bool',
-        'step_therapy' => 'bool'
+        'step_therapy' => 'bool',
+        'tier' => 'string'
     );
 
     public static function swaggerTypes()
@@ -198,10 +199,11 @@ class DrugCoverage implements ArrayAccess
     protected static $attributeMap = array(
         'plan_id' => 'plan_id',
         'drug_package_id' => 'drug_package_id',
-        'tier' => 'tier',
+        'med_id' => 'med_id',
         'quantity_limit' => 'quantity_limit',
         'prior_authorization' => 'prior_authorization',
-        'step_therapy' => 'step_therapy'
+        'step_therapy' => 'step_therapy',
+        'tier' => 'tier'
     );
 
     public static function attributeMap()
@@ -216,10 +218,11 @@ class DrugCoverage implements ArrayAccess
     protected static $setters = array(
         'plan_id' => 'setPlanId',
         'drug_package_id' => 'setDrugPackageId',
-        'tier' => 'setTier',
+        'med_id' => 'setMedId',
         'quantity_limit' => 'setQuantityLimit',
         'prior_authorization' => 'setPriorAuthorization',
-        'step_therapy' => 'setStepTherapy'
+        'step_therapy' => 'setStepTherapy',
+        'tier' => 'setTier'
     );
 
     public static function setters()
@@ -234,10 +237,11 @@ class DrugCoverage implements ArrayAccess
     protected static $getters = array(
         'plan_id' => 'getPlanId',
         'drug_package_id' => 'getDrugPackageId',
-        'tier' => 'getTier',
+        'med_id' => 'getMedId',
         'quantity_limit' => 'getQuantityLimit',
         'prior_authorization' => 'getPriorAuthorization',
-        'step_therapy' => 'getStepTherapy'
+        'step_therapy' => 'getStepTherapy',
+        'tier' => 'getTier'
     );
 
     public static function getters()
@@ -257,16 +261,17 @@ class DrugCoverage implements ArrayAccess
 
     /**
      * Constructor
-     * @param mixed[] $data Associated array of property value initalizing the model
+     * @param mixed[] $data Associated array of property values initializing the model
      */
     public function __construct(array $data = null)
     {
         $this->container['plan_id'] = isset($data['plan_id']) ? $data['plan_id'] : null;
         $this->container['drug_package_id'] = isset($data['drug_package_id']) ? $data['drug_package_id'] : null;
-        $this->container['tier'] = isset($data['tier']) ? $data['tier'] : null;
+        $this->container['med_id'] = isset($data['med_id']) ? $data['med_id'] : null;
         $this->container['quantity_limit'] = isset($data['quantity_limit']) ? $data['quantity_limit'] : null;
         $this->container['prior_authorization'] = isset($data['prior_authorization']) ? $data['prior_authorization'] : null;
         $this->container['step_therapy'] = isset($data['step_therapy']) ? $data['step_therapy'] : null;
+        $this->container['tier'] = isset($data['tier']) ? $data['tier'] : null;
     }
 
     /**
@@ -335,22 +340,22 @@ class DrugCoverage implements ArrayAccess
     }
 
     /**
-     * Gets tier
-     * @return string
+     * Gets med_id
+     * @return int
      */
-    public function getTier()
+    public function getMedId()
     {
-        return $this->container['tier'];
+        return $this->container['med_id'];
     }
 
     /**
-     * Sets tier
-     * @param string $tier Tier Name
+     * Sets med_id
+     * @param int $med_id Med ID
      * @return $this
      */
-    public function setTier($tier)
+    public function setMedId($med_id)
     {
-        $this->container['tier'] = $tier;
+        $this->container['med_id'] = $med_id;
 
         return $this;
     }
@@ -414,6 +419,27 @@ class DrugCoverage implements ArrayAccess
     public function setStepTherapy($step_therapy)
     {
         $this->container['step_therapy'] = $step_therapy;
+
+        return $this;
+    }
+
+    /**
+     * Gets tier
+     * @return string
+     */
+    public function getTier()
+    {
+        return $this->container['tier'];
+    }
+
+    /**
+     * Sets tier
+     * @param string $tier Tier Name
+     * @return $this
+     */
+    public function setTier($tier)
+    {
+        $this->container['tier'] = $tier;
 
         return $this;
     }

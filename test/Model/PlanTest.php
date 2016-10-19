@@ -696,6 +696,14 @@ class PlanTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "premium_source"
+     */
+    public function testPropertyPremiumSource()
+    {
+
+    }
+
+    /**
      * Test attribute "primary_care_physician"
      */
     public function testPropertyPrimaryCarePhysician()

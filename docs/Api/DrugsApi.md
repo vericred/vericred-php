@@ -26,9 +26,9 @@ Vericred\Client\Configuration::getDefaultConfiguration()->setApiKey('Vericred-Ap
 // Vericred\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Vericred-Api-Key', 'Bearer');
 
 $api_instance = new Vericred\Client\Api\DrugsApi();
-$ndc_package_code = "12345-4321-11"; // string | NDC package code
-$audience = "individual"; // string | Two-character state code
-$state_code = "NY"; // string | Two-character state code
+$ndc_package_code = "07777-3105-01"; // string | NDC package code
+$audience = "individual"; // string | Plan Audience (individual or small_group)
+$state_code = "CA"; // string | Two-character state code
 
 try {
     $result = $api_instance->getDrugCoverages($ndc_package_code, $audience, $state_code);
@@ -44,7 +44,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ndc_package_code** | **string**| NDC package code |
- **audience** | **string**| Two-character state code |
+ **audience** | **string**| Plan Audience (individual or small_group) |
  **state_code** | **string**| Two-character state code |
 
 ### Return type

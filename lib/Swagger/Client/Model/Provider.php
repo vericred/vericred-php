@@ -187,13 +187,13 @@ class Provider implements ArrayAccess
         'email' => 'string',
         'gender' => 'string',
         'first_name' => 'string',
-        'hios_ids' => 'string[]',
         'id' => 'int',
         'last_name' => 'string',
         'latitude' => 'float',
         'longitude' => 'float',
         'middle_name' => 'string',
         'network_ids' => 'int[]',
+        'organization_name' => 'string',
         'personal_phone' => 'string',
         'phone' => 'string',
         'presentation_name' => 'string',
@@ -227,13 +227,13 @@ class Provider implements ArrayAccess
         'email' => 'email',
         'gender' => 'gender',
         'first_name' => 'first_name',
-        'hios_ids' => 'hios_ids',
         'id' => 'id',
         'last_name' => 'last_name',
         'latitude' => 'latitude',
         'longitude' => 'longitude',
         'middle_name' => 'middle_name',
         'network_ids' => 'network_ids',
+        'organization_name' => 'organization_name',
         'personal_phone' => 'personal_phone',
         'phone' => 'phone',
         'presentation_name' => 'presentation_name',
@@ -267,13 +267,13 @@ class Provider implements ArrayAccess
         'email' => 'setEmail',
         'gender' => 'setGender',
         'first_name' => 'setFirstName',
-        'hios_ids' => 'setHiosIds',
         'id' => 'setId',
         'last_name' => 'setLastName',
         'latitude' => 'setLatitude',
         'longitude' => 'setLongitude',
         'middle_name' => 'setMiddleName',
         'network_ids' => 'setNetworkIds',
+        'organization_name' => 'setOrganizationName',
         'personal_phone' => 'setPersonalPhone',
         'phone' => 'setPhone',
         'presentation_name' => 'setPresentationName',
@@ -307,13 +307,13 @@ class Provider implements ArrayAccess
         'email' => 'getEmail',
         'gender' => 'getGender',
         'first_name' => 'getFirstName',
-        'hios_ids' => 'getHiosIds',
         'id' => 'getId',
         'last_name' => 'getLastName',
         'latitude' => 'getLatitude',
         'longitude' => 'getLongitude',
         'middle_name' => 'getMiddleName',
         'network_ids' => 'getNetworkIds',
+        'organization_name' => 'getOrganizationName',
         'personal_phone' => 'getPersonalPhone',
         'phone' => 'getPhone',
         'presentation_name' => 'getPresentationName',
@@ -345,7 +345,7 @@ class Provider implements ArrayAccess
 
     /**
      * Constructor
-     * @param mixed[] $data Associated array of property value initalizing the model
+     * @param mixed[] $data Associated array of property values initializing the model
      */
     public function __construct(array $data = null)
     {
@@ -358,13 +358,13 @@ class Provider implements ArrayAccess
         $this->container['email'] = isset($data['email']) ? $data['email'] : null;
         $this->container['gender'] = isset($data['gender']) ? $data['gender'] : null;
         $this->container['first_name'] = isset($data['first_name']) ? $data['first_name'] : null;
-        $this->container['hios_ids'] = isset($data['hios_ids']) ? $data['hios_ids'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['last_name'] = isset($data['last_name']) ? $data['last_name'] : null;
         $this->container['latitude'] = isset($data['latitude']) ? $data['latitude'] : null;
         $this->container['longitude'] = isset($data['longitude']) ? $data['longitude'] : null;
         $this->container['middle_name'] = isset($data['middle_name']) ? $data['middle_name'] : null;
         $this->container['network_ids'] = isset($data['network_ids']) ? $data['network_ids'] : null;
+        $this->container['organization_name'] = isset($data['organization_name']) ? $data['organization_name'] : null;
         $this->container['personal_phone'] = isset($data['personal_phone']) ? $data['personal_phone'] : null;
         $this->container['phone'] = isset($data['phone']) ? $data['phone'] : null;
         $this->container['presentation_name'] = isset($data['presentation_name']) ? $data['presentation_name'] : null;
@@ -592,27 +592,6 @@ class Provider implements ArrayAccess
     }
 
     /**
-     * Gets hios_ids
-     * @return string[]
-     */
-    public function getHiosIds()
-    {
-        return $this->container['hios_ids'];
-    }
-
-    /**
-     * Sets hios_ids
-     * @param string[] $hios_ids List of HIOS ids for this provider
-     * @return $this
-     */
-    public function setHiosIds($hios_ids)
-    {
-        $this->container['hios_ids'] = $hios_ids;
-
-        return $this;
-    }
-
-    /**
      * Gets id
      * @return int
      */
@@ -734,6 +713,27 @@ class Provider implements ArrayAccess
     public function setNetworkIds($network_ids)
     {
         $this->container['network_ids'] = $network_ids;
+
+        return $this;
+    }
+
+    /**
+     * Gets organization_name
+     * @return string
+     */
+    public function getOrganizationName()
+    {
+        return $this->container['organization_name'];
+    }
+
+    /**
+     * Sets organization_name
+     * @param string $organization_name name for the providers of type: organization.
+     * @return $this
+     */
+    public function setOrganizationName($organization_name)
+    {
+        $this->container['organization_name'] = $organization_name;
 
         return $this;
     }

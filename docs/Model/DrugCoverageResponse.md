@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**meta** | [**\Swagger\Client\Model\Meta**](Meta.md) | Metadata for query | [optional] 
+**meta** | [**\Swagger\Client\Model\Meta**](Meta.md) | Meta-data | [optional] 
 **drug_coverages** | [**\Swagger\Client\Model\DrugCoverage[]**](DrugCoverage.md) | DrugCoverage search results | [optional] 
 **drugs** | [**\Swagger\Client\Model\Drug[]**](Drug.md) | Drug | [optional] 
 **drug_packages** | [**\Swagger\Client\Model\DrugPackage[]**](DrugPackage.md) | Drug Packages | [optional] 

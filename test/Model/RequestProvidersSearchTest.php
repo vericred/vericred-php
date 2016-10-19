@@ -232,6 +232,14 @@ class RequestProvidersSearchTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "network_ids"
+     */
+    public function testPropertyNetworkIds()
+    {
+
+    }
+
+    /**
      * Test attribute "page"
      */
     public function testPropertyPage()

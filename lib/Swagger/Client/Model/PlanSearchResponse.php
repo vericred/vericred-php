@@ -180,7 +180,7 @@ class PlanSearchResponse implements ArrayAccess
     protected static $swaggerTypes = array(
         'meta' => '\Swagger\Client\Model\Meta',
         'plans' => '\Swagger\Client\Model\Plan[]',
-        'coverages' => '\Swagger\Client\Model\Drug[]'
+        'coverages' => '\Swagger\Client\Model\DrugCoverage[]'
     );
 
     public static function swaggerTypes()
@@ -245,7 +245,7 @@ class PlanSearchResponse implements ArrayAccess
 
     /**
      * Constructor
-     * @param mixed[] $data Associated array of property value initalizing the model
+     * @param mixed[] $data Associated array of property values initializing the model
      */
     public function __construct(array $data = null)
     {
@@ -288,7 +288,7 @@ class PlanSearchResponse implements ArrayAccess
 
     /**
      * Sets meta
-     * @param \Swagger\Client\Model\Meta $meta Metadata for query
+     * @param \Swagger\Client\Model\Meta $meta Meta-data
      * @return $this
      */
     public function setMeta($meta)
@@ -321,7 +321,7 @@ class PlanSearchResponse implements ArrayAccess
 
     /**
      * Gets coverages
-     * @return \Swagger\Client\Model\Drug[]
+     * @return \Swagger\Client\Model\DrugCoverage[]
      */
     public function getCoverages()
     {
@@ -330,7 +330,7 @@ class PlanSearchResponse implements ArrayAccess
 
     /**
      * Sets coverages
-     * @param \Swagger\Client\Model\Drug[] $coverages null
+     * @param \Swagger\Client\Model\DrugCoverage[] $coverages Coverages associated with the plan.
      * @return $this
      */
     public function setCoverages($coverages)

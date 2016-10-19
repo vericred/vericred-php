@@ -241,7 +241,7 @@ class NetworkSearchResponse implements ArrayAccess
 
     /**
      * Constructor
-     * @param mixed[] $data Associated array of property value initalizing the model
+     * @param mixed[] $data Associated array of property values initializing the model
      */
     public function __construct(array $data = null)
     {
@@ -283,7 +283,7 @@ class NetworkSearchResponse implements ArrayAccess
 
     /**
      * Sets meta
-     * @param \Swagger\Client\Model\Meta $meta Metadata for query
+     * @param \Swagger\Client\Model\Meta $meta Meta-data
      * @return $this
      */
     public function setMeta($meta)

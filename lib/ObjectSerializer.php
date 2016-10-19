@@ -170,7 +170,7 @@ class ObjectSerializer
      *
      * @param mixed $data the data to serialize
      *
-     * @return string serialized form of $data
+     * @return string|object serialized form of $data
      */
     public static function sanitizeForSerialization($data)
     {
@@ -233,7 +233,7 @@ class ObjectSerializer
      * If it's a string, pass through unchanged. It will be url-encoded
      * later.
      *
-     * @param object $object an object to be serialized to a string
+     * @param string[]|string|\DateTime $object an object to be serialized to a string
      *
      * @return string the serialized object
      */
@@ -265,7 +265,7 @@ class ObjectSerializer
      * the http body (form parameter). If it's a string, pass through unchanged
      * If it's a datetime object, format it in ISO8601
      *
-     * @param string $value the value of the form parameter
+     * @param string|\SplFileObject $value the value of the form parameter
      *
      * @return string the form string
      */
@@ -283,7 +283,7 @@ class ObjectSerializer
      * the parameter. If it's a string, pass through unchanged
      * If it's a datetime object, format it in ISO8601
      *
-     * @param string $value the value of the parameter
+     * @param string|\DateTime $value the value of the parameter
      *
      * @return string the header string
      */
@@ -299,9 +299,10 @@ class ObjectSerializer
     /**
      * Serialize an array to a string.
      *
-     * @param array  $collection       collection to serialize to a string
-     * @param string $collectionFormat the format use for serialization (csv,
+     * @param array  $collection                 collection to serialize to a string
+     * @param string $collectionFormat           the format use for serialization (csv,
      * ssv, tsv, pipes, multi)
+     * @param bool   $allowCollectionFormatMulti allow collection format to be a multidimensional array
      *
      * @return string
      */
@@ -332,12 +333,12 @@ class ObjectSerializer
     /**
      * Deserialize a JSON string into an object
      *
-     * @param mixed  $data          object or primitive to be deserialized
-     * @param string $class         class name is passed as a string
-     * @param string $httpHeaders   HTTP headers
-     * @param string $discriminator discriminator if polymorphism is used
+     * @param mixed    $data          object or primitive to be deserialized
+     * @param string   $class         class name is passed as a string
+     * @param string[] $httpHeaders   HTTP headers
+     * @param string   $discriminator discriminator if polymorphism is used
      *
-     * @return object an instance of $class
+     * @return object|array|null an single or an array of $class instances
      */
     public static function deserialize($data, $class, $httpHeaders = null, $discriminator = null)
     {
@@ -376,7 +377,7 @@ class ObjectSerializer
             } else {
                 return null;
             }
-        } elseif (in_array($class, array('void', 'bool', 'string', 'double', 'byte', 'mixed', 'integer', 'float', 'int', 'DateTime', 'number', 'boolean', 'object'))) {
+        } elseif (in_array($class, array('DateTime', 'bool', 'boolean', 'byte', 'double', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'))) {
             settype($data, $class);
             return $data;
         } elseif ($class === '\SplFileObject') {

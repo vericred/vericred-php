@@ -181,6 +181,7 @@ class RequestProvidersSearch implements ArrayAccess
         'accepts_insurance' => 'bool',
         'hios_ids' => 'string[]',
         'min_score' => 'float',
+        'network_ids' => 'int[]',
         'page' => 'int',
         'per_page' => 'int',
         'radius' => 'int',
@@ -202,6 +203,7 @@ class RequestProvidersSearch implements ArrayAccess
         'accepts_insurance' => 'accepts_insurance',
         'hios_ids' => 'hios_ids',
         'min_score' => 'min_score',
+        'network_ids' => 'network_ids',
         'page' => 'page',
         'per_page' => 'per_page',
         'radius' => 'radius',
@@ -223,6 +225,7 @@ class RequestProvidersSearch implements ArrayAccess
         'accepts_insurance' => 'setAcceptsInsurance',
         'hios_ids' => 'setHiosIds',
         'min_score' => 'setMinScore',
+        'network_ids' => 'setNetworkIds',
         'page' => 'setPage',
         'per_page' => 'setPerPage',
         'radius' => 'setRadius',
@@ -244,6 +247,7 @@ class RequestProvidersSearch implements ArrayAccess
         'accepts_insurance' => 'getAcceptsInsurance',
         'hios_ids' => 'getHiosIds',
         'min_score' => 'getMinScore',
+        'network_ids' => 'getNetworkIds',
         'page' => 'getPage',
         'per_page' => 'getPerPage',
         'radius' => 'getRadius',
@@ -269,13 +273,14 @@ class RequestProvidersSearch implements ArrayAccess
 
     /**
      * Constructor
-     * @param mixed[] $data Associated array of property value initalizing the model
+     * @param mixed[] $data Associated array of property values initializing the model
      */
     public function __construct(array $data = null)
     {
         $this->container['accepts_insurance'] = isset($data['accepts_insurance']) ? $data['accepts_insurance'] : null;
         $this->container['hios_ids'] = isset($data['hios_ids']) ? $data['hios_ids'] : null;
         $this->container['min_score'] = isset($data['min_score']) ? $data['min_score'] : null;
+        $this->container['network_ids'] = isset($data['network_ids']) ? $data['network_ids'] : null;
         $this->container['page'] = isset($data['page']) ? $data['page'] : null;
         $this->container['per_page'] = isset($data['per_page']) ? $data['per_page'] : null;
         $this->container['radius'] = isset($data['radius']) ? $data['radius'] : null;
@@ -366,6 +371,27 @@ class RequestProvidersSearch implements ArrayAccess
     public function setMinScore($min_score)
     {
         $this->container['min_score'] = $min_score;
+
+        return $this;
+    }
+
+    /**
+     * Gets network_ids
+     * @return int[]
+     */
+    public function getNetworkIds()
+    {
+        return $this->container['network_ids'];
+    }
+
+    /**
+     * Sets network_ids
+     * @param int[] $network_ids List of Vericred network ids
+     * @return $this
+     */
+    public function setNetworkIds($network_ids)
+    {
+        $this->container['network_ids'] = $network_ids;
 
         return $this;
     }

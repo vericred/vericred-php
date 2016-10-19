@@ -188,7 +188,9 @@ class Pricing implements ArrayAccess
         'premium_single_and_children' => 'float',
         'premium_single_and_spouse' => 'float',
         'premium_single_smoker' => 'float',
-        'rating_area_id' => 'string'
+        'rating_area_id' => 'string',
+        'premium_source' => 'string',
+        'updated_at' => 'string'
     );
 
     public static function swaggerTypes()
@@ -211,7 +213,9 @@ class Pricing implements ArrayAccess
         'premium_single_and_children' => 'premium_single_and_children',
         'premium_single_and_spouse' => 'premium_single_and_spouse',
         'premium_single_smoker' => 'premium_single_smoker',
-        'rating_area_id' => 'rating_area_id'
+        'rating_area_id' => 'rating_area_id',
+        'premium_source' => 'premium_source',
+        'updated_at' => 'updated_at'
     );
 
     public static function attributeMap()
@@ -234,7 +238,9 @@ class Pricing implements ArrayAccess
         'premium_single_and_children' => 'setPremiumSingleAndChildren',
         'premium_single_and_spouse' => 'setPremiumSingleAndSpouse',
         'premium_single_smoker' => 'setPremiumSingleSmoker',
-        'rating_area_id' => 'setRatingAreaId'
+        'rating_area_id' => 'setRatingAreaId',
+        'premium_source' => 'setPremiumSource',
+        'updated_at' => 'setUpdatedAt'
     );
 
     public static function setters()
@@ -257,7 +263,9 @@ class Pricing implements ArrayAccess
         'premium_single_and_children' => 'getPremiumSingleAndChildren',
         'premium_single_and_spouse' => 'getPremiumSingleAndSpouse',
         'premium_single_smoker' => 'getPremiumSingleSmoker',
-        'rating_area_id' => 'getRatingAreaId'
+        'rating_area_id' => 'getRatingAreaId',
+        'premium_source' => 'getPremiumSource',
+        'updated_at' => 'getUpdatedAt'
     );
 
     public static function getters()
@@ -277,7 +285,7 @@ class Pricing implements ArrayAccess
 
     /**
      * Constructor
-     * @param mixed[] $data Associated array of property value initalizing the model
+     * @param mixed[] $data Associated array of property values initializing the model
      */
     public function __construct(array $data = null)
     {
@@ -292,6 +300,8 @@ class Pricing implements ArrayAccess
         $this->container['premium_single_and_spouse'] = isset($data['premium_single_and_spouse']) ? $data['premium_single_and_spouse'] : null;
         $this->container['premium_single_smoker'] = isset($data['premium_single_smoker']) ? $data['premium_single_smoker'] : null;
         $this->container['rating_area_id'] = isset($data['rating_area_id']) ? $data['rating_area_id'] : null;
+        $this->container['premium_source'] = isset($data['premium_source']) ? $data['premium_source'] : null;
+        $this->container['updated_at'] = isset($data['updated_at']) ? $data['updated_at'] : null;
     }
 
     /**
@@ -544,6 +554,48 @@ class Pricing implements ArrayAccess
     public function setRatingAreaId($rating_area_id)
     {
         $this->container['rating_area_id'] = $rating_area_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets premium_source
+     * @return string
+     */
+    public function getPremiumSource()
+    {
+        return $this->container['premium_source'];
+    }
+
+    /**
+     * Sets premium_source
+     * @param string $premium_source Where was this pricing data extracted from?
+     * @return $this
+     */
+    public function setPremiumSource($premium_source)
+    {
+        $this->container['premium_source'] = $premium_source;
+
+        return $this;
+    }
+
+    /**
+     * Gets updated_at
+     * @return string
+     */
+    public function getUpdatedAt()
+    {
+        return $this->container['updated_at'];
+    }
+
+    /**
+     * Sets updated_at
+     * @param string $updated_at Time when pricing was last updated
+     * @return $this
+     */
+    public function setUpdatedAt($updated_at)
+    {
+        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

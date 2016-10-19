@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**meta** | [**\Swagger\Client\Model\Meta**](Meta.md) | Metadata for query | [optional] 
+**meta** | [**\Swagger\Client\Model\Meta**](Meta.md) | Meta-data | [optional] 
 **providers** | [**\Swagger\Client\Model\Provider[]**](Provider.md) | Providers that fit the requested criterion. | [optional] 
 **states** | [**\Swagger\Client\Model\State[]**](State.md) | States that fit the requested criterion. | [optional] 
 
