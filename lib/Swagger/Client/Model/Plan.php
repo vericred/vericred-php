@@ -164,19 +164,51 @@ In [this other Summary of Benefits &amp; Coverage](https://s3.amazonaws.com/veri
 Here's a description of the benefits summary string, represented as a context-free grammar:
 
 ```
-<cost-share>     ::= <tier> <opt-num-prefix> <value> <opt-per-unit> <deductible> <tier-limit> "/" <tier> <opt-num-prefix> <value> <opt-per-unit> <deductible> "|" <benefit-limit>
-<tier>           ::= "In-Network:" | "In-Network-Tier-2:" | "Out-of-Network:"
-<opt-num-prefix> ::= "first" <num> <unit> | ""
-<unit>           ::= "day(s)" | "visit(s)" | "exam(s)" | "item(s)"
-<value>          ::= <ddct_moop> | <copay> | <coinsurance> | <compound> | "unknown" | "Not Applicable"
-<compound>       ::= <copay> <deductible> "then" <coinsurance> <deductible> | <copay> <deductible> "then" <copay> <deductible> | <coinsurance> <deductible> "then" <coinsurance> <deductible>
-<copay>          ::= "$" <num>
-<coinsurace>     ::= <num> "%"
-<ddct_moop>      ::= <copay> | "Included in Medical" | "Unlimited"
-<opt-per-unit>   ::= "per day" | "per visit" | "per stay" | ""
-<deductible>     ::= "before deductible" | "after deductible" | ""
-<tier-limit>     ::= ", " <limit> | ""
-<benefit-limit>  ::= <limit> | ""
+root                      ::= coverage
+
+coverage                  ::= (simple_coverage | tiered_coverage) (space pipe space coverage_limitation)?
+tiered_coverage           ::= tier (space slash space tier)*
+tier                      ::= tier_name colon space (tier_coverage | not_applicable)
+tier_coverage             ::= simple_coverage (space (then | or | and) space simple_coverage)* tier_limitation?
+simple_coverage           ::= (pre_coverage_limitation space)? coverage_amount (space post_coverage_limitation)? (comma? space coverage_condition)?
+coverage_limitation       ::= "limit" colon space (((simple_coverage | simple_limitation) (semicolon space see_carrier_documentation)?) | see_carrier_documentation | waived_if_admitted)
+waived_if_admitted        ::= ("copay" space)? "waived if admitted"
+simple_limitation         ::= pre_coverage_limitation space "copay applies"
+tier_name                 ::= "In-Network-Tier-2" | "Out-of-Network" | "In-Network"
+tier_limitation           ::= comma space "up to" space (currency | (integer space time_unit plural?)) (space post_coverage_limitation)?
+coverage_amount           ::= currency | unlimited | included | unknown | percentage | (digits space (treatment_unit | time_unit) plural?)
+pre_coverage_limitation   ::= first space digits space time_unit plural?
+post_coverage_limitation  ::= (((then space currency) | "per condition") space)? "per" space (treatment_unit | (integer space time_unit) | time_unit) plural?
+coverage_condition        ::= ("before deductible" | "after deductible" | "penalty" | allowance | "in-state" | "out-of-state") (space allowance)?
+allowance                 ::= upto_allowance | after_allowance
+upto_allowance            ::= "up to" space (currency space)? "allowance"
+after_allowance           ::= "after" space (currency space)? "allowance"
+see_carrier_documentation ::= "see carrier documentation for more information"
+unknown                   ::= "unknown"
+unlimited                 ::= /[uU]nlimited/
+included                  ::= /[iI]ncluded in [mM]edical/
+time_unit                 ::= /[hH]our/ | (((/[cC]alendar/ | /[cC]ontract/) space)? /[yY]ear/) | /[mM]onth/ | /[dD]ay/ | /[wW]eek/ | /[vV]isit/ | /[lL]ifetime/ | ((((/[bB]enefit/ plural?) | /[eE]ligibility/) space)? /[pP]eriod/)
+treatment_unit            ::= /[pP]erson/ | /[gG]roup/ | /[cC]ondition/ | /[sS]cript/ | /[vV]isit/ | /[eE]xam/ | /[iI]tem/ | /[sS]tay/ | /[tT]reatment/ | /[aA]dmission/ | /[eE]pisode/
+comma                     ::= ","
+colon                     ::= ":"
+semicolon                 ::= ";"
+pipe                      ::= "|"
+slash                     ::= "/"
+plural                    ::= "(s)" | "s"
+then                      ::= "then" | ("," space) | space
+or                        ::= "or"
+and                       ::= "and"
+not_applicable            ::= "Not Applicable" | "N/A" | "NA"
+first                     ::= "first"
+currency                  ::= "$" number
+percentage                ::= number "%"
+number                    ::= float | integer
+float                     ::= digits "." digits
+integer                   ::= /[0-9]/+ (comma_int | under_int)*
+comma_int                 ::= ("," /[0-9]/*3) !"_"
+under_int                 ::= ("_" /[0-9]/*3) !","
+digits                    ::= /[0-9]/+ ("_" /[0-9]/+)*
+space                     ::= /[ \t]/+
 ```
 
 
@@ -299,6 +331,7 @@ class Plan implements ArrayAccess
         'rehabilitation_services' => 'string',
         'service_area_id' => 'string',
         'skilled_nursing' => 'string',
+        'source' => 'string',
         'specialist' => 'string',
         'specialty_drugs' => 'string',
         'urgent_care' => 'string'
@@ -380,6 +413,7 @@ class Plan implements ArrayAccess
         'rehabilitation_services' => 'rehabilitation_services',
         'service_area_id' => 'service_area_id',
         'skilled_nursing' => 'skilled_nursing',
+        'source' => 'source',
         'specialist' => 'specialist',
         'specialty_drugs' => 'specialty_drugs',
         'urgent_care' => 'urgent_care'
@@ -461,6 +495,7 @@ class Plan implements ArrayAccess
         'rehabilitation_services' => 'setRehabilitationServices',
         'service_area_id' => 'setServiceAreaId',
         'skilled_nursing' => 'setSkilledNursing',
+        'source' => 'setSource',
         'specialist' => 'setSpecialist',
         'specialty_drugs' => 'setSpecialtyDrugs',
         'urgent_care' => 'setUrgentCare'
@@ -542,6 +577,7 @@ class Plan implements ArrayAccess
         'rehabilitation_services' => 'getRehabilitationServices',
         'service_area_id' => 'getServiceAreaId',
         'skilled_nursing' => 'getSkilledNursing',
+        'source' => 'getSource',
         'specialist' => 'getSpecialist',
         'specialty_drugs' => 'getSpecialtyDrugs',
         'urgent_care' => 'getUrgentCare'
@@ -634,6 +670,7 @@ class Plan implements ArrayAccess
         $this->container['rehabilitation_services'] = isset($data['rehabilitation_services']) ? $data['rehabilitation_services'] : null;
         $this->container['service_area_id'] = isset($data['service_area_id']) ? $data['service_area_id'] : null;
         $this->container['skilled_nursing'] = isset($data['skilled_nursing']) ? $data['skilled_nursing'] : null;
+        $this->container['source'] = isset($data['source']) ? $data['source'] : null;
         $this->container['specialist'] = isset($data['specialist']) ? $data['specialist'] : null;
         $this->container['specialty_drugs'] = isset($data['specialty_drugs']) ? $data['specialty_drugs'] : null;
         $this->container['urgent_care'] = isset($data['urgent_care']) ? $data['urgent_care'] : null;
@@ -1828,7 +1865,7 @@ class Plan implements ArrayAccess
 
     /**
      * Sets plan_type
-     * @param string $plan_type Category of the plan (e.g. EPO, HMO, PPO, POS, Indemnity)
+     * @param string $plan_type Category of the plan (e.g. EPO, HMO, PPO, POS, Indemnity, PACE, Medicare-Medicaid, HMO w/POS, Cost, FFS, MSA)
      * @return $this
      */
     public function setPlanType($plan_type)
@@ -2044,6 +2081,27 @@ class Plan implements ArrayAccess
     public function setSkilledNursing($skilled_nursing)
     {
         $this->container['skilled_nursing'] = $skilled_nursing;
+
+        return $this;
+    }
+
+    /**
+     * Gets source
+     * @return string
+     */
+    public function getSource()
+    {
+        return $this->container['source'];
+    }
+
+    /**
+     * Sets source
+     * @param string $source Source of the plan benefit data
+     * @return $this
+     */
+    public function setSource($source)
+    {
+        $this->container['source'] = $source;
 
         return $this;
     }
