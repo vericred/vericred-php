@@ -109,7 +109,7 @@ document.
 In this case, we want to select `name` and `phone` from the `provider` key,
 so we would add the parameters `select=provider.name,provider.phone`.
 We also want the `name` and `code` from the `states` key, so we would
-add the parameters `select=states.name,staes.code`.  The id field of
+add the parameters `select=states.name,states.code`.  The id field of
 each document is always returned whether or not it is requested.
 
 Our final request would be `GET /providers/12345?select=provider.name,provider.phone,states.name,states.code`
@@ -164,19 +164,53 @@ In [this other Summary of Benefits &amp; Coverage](https://s3.amazonaws.com/veri
 Here's a description of the benefits summary string, represented as a context-free grammar:
 
 ```
-<cost-share>     ::= <tier> <opt-num-prefix> <value> <opt-per-unit> <deductible> <tier-limit> "/" <tier> <opt-num-prefix> <value> <opt-per-unit> <deductible> "|" <benefit-limit>
-<tier>           ::= "In-Network:" | "In-Network-Tier-2:" | "Out-of-Network:"
-<opt-num-prefix> ::= "first" <num> <unit> | ""
-<unit>           ::= "day(s)" | "visit(s)" | "exam(s)" | "item(s)"
-<value>          ::= <ddct_moop> | <copay> | <coinsurance> | <compound> | "unknown" | "Not Applicable"
-<compound>       ::= <copay> <deductible> "then" <coinsurance> <deductible> | <copay> <deductible> "then" <copay> <deductible> | <coinsurance> <deductible> "then" <coinsurance> <deductible>
-<copay>          ::= "$" <num>
-<coinsurace>     ::= <num> "%"
-<ddct_moop>      ::= <copay> | "Included in Medical" | "Unlimited"
-<opt-per-unit>   ::= "per day" | "per visit" | "per stay" | ""
-<deductible>     ::= "before deductible" | "after deductible" | ""
-<tier-limit>     ::= ", " <limit> | ""
-<benefit-limit>  ::= <limit> | ""
+root                      ::= coverage
+
+coverage                  ::= (simple_coverage | tiered_coverage) (space pipe space coverage_modifier)?
+tiered_coverage           ::= tier (space slash space tier)*
+tier                      ::= tier_name colon space (tier_coverage | not_applicable)
+tier_coverage             ::= simple_coverage (space (then | or | and) space simple_coverage)* tier_limitation?
+simple_coverage           ::= (pre_coverage_limitation space)? coverage_amount (space post_coverage_limitation)? (comma? space coverage_condition)?
+coverage_modifier         ::= limit_condition colon space (((simple_coverage | simple_limitation) (semicolon space see_carrier_documentation)?) | see_carrier_documentation | waived_if_admitted | shared_across_tiers)
+waived_if_admitted        ::= ("copay" space)? "waived if admitted"
+simple_limitation         ::= pre_coverage_limitation space "copay applies"
+tier_name                 ::= "In-Network-Tier-2" | "Out-of-Network" | "In-Network"
+limit_condition           ::= "limit" | "condition"
+tier_limitation           ::= comma space "up to" space (currency | (integer space time_unit plural?)) (space post_coverage_limitation)?
+coverage_amount           ::= currency | unlimited | included | unknown | percentage | (digits space (treatment_unit | time_unit) plural?)
+pre_coverage_limitation   ::= first space digits space time_unit plural?
+post_coverage_limitation  ::= (((then space currency) | "per condition") space)? "per" space (treatment_unit | (integer space time_unit) | time_unit) plural?
+coverage_condition        ::= ("before deductible" | "after deductible" | "penalty" | allowance | "in-state" | "out-of-state") (space allowance)?
+allowance                 ::= upto_allowance | after_allowance
+upto_allowance            ::= "up to" space (currency space)? "allowance"
+after_allowance           ::= "after" space (currency space)? "allowance"
+see_carrier_documentation ::= "see carrier documentation for more information"
+shared_across_tiers       ::= "shared across all tiers"
+unknown                   ::= "unknown"
+unlimited                 ::= /[uU]nlimited/
+included                  ::= /[iI]ncluded in [mM]edical/
+time_unit                 ::= /[hH]our/ | (((/[cC]alendar/ | /[cC]ontract/) space)? /[yY]ear/) | /[mM]onth/ | /[dD]ay/ | /[wW]eek/ | /[vV]isit/ | /[lL]ifetime/ | ((((/[bB]enefit/ plural?) | /[eE]ligibility/) space)? /[pP]eriod/)
+treatment_unit            ::= /[pP]erson/ | /[gG]roup/ | /[cC]ondition/ | /[sS]cript/ | /[vV]isit/ | /[eE]xam/ | /[iI]tem/ | /[sS]tay/ | /[tT]reatment/ | /[aA]dmission/ | /[eE]pisode/
+comma                     ::= ","
+colon                     ::= ":"
+semicolon                 ::= ";"
+pipe                      ::= "|"
+slash                     ::= "/"
+plural                    ::= "(s)" | "s"
+then                      ::= "then" | ("," space) | space
+or                        ::= "or"
+and                       ::= "and"
+not_applicable            ::= "Not Applicable" | "N/A" | "NA"
+first                     ::= "first"
+currency                  ::= "$" number
+percentage                ::= number "%"
+number                    ::= float | integer
+float                     ::= digits "." digits
+integer                   ::= /[0-9]/+ (comma_int | under_int)*
+comma_int                 ::= ("," /[0-9]/*3) !"_"
+under_int                 ::= ("_" /[0-9]/*3) !","
+digits                    ::= /[0-9]/+ ("_" /[0-9]/+)*
+space                     ::= /[ \t]/+
 ```
 
 
@@ -244,7 +278,6 @@ class Provider implements ArrayAccess
         'middle_name' => 'string',
         'network_ids' => 'int[]',
         'organization_name' => 'string',
-        'personal_phone' => 'string',
         'phone' => 'string',
         'presentation_name' => 'string',
         'specialty' => 'string',
@@ -255,7 +288,8 @@ class Provider implements ArrayAccess
         'suffix' => 'string',
         'title' => 'string',
         'type' => 'string',
-        'zip_code' => 'string'
+        'zip_code' => 'string',
+        'npis' => 'int[]'
     );
 
     public static function swaggerTypes()
@@ -279,7 +313,6 @@ class Provider implements ArrayAccess
         'middle_name' => 'middle_name',
         'network_ids' => 'network_ids',
         'organization_name' => 'organization_name',
-        'personal_phone' => 'personal_phone',
         'phone' => 'phone',
         'presentation_name' => 'presentation_name',
         'specialty' => 'specialty',
@@ -290,7 +323,8 @@ class Provider implements ArrayAccess
         'suffix' => 'suffix',
         'title' => 'title',
         'type' => 'type',
-        'zip_code' => 'zip_code'
+        'zip_code' => 'zip_code',
+        'npis' => 'npis'
     );
 
     public static function attributeMap()
@@ -314,7 +348,6 @@ class Provider implements ArrayAccess
         'middle_name' => 'setMiddleName',
         'network_ids' => 'setNetworkIds',
         'organization_name' => 'setOrganizationName',
-        'personal_phone' => 'setPersonalPhone',
         'phone' => 'setPhone',
         'presentation_name' => 'setPresentationName',
         'specialty' => 'setSpecialty',
@@ -325,7 +358,8 @@ class Provider implements ArrayAccess
         'suffix' => 'setSuffix',
         'title' => 'setTitle',
         'type' => 'setType',
-        'zip_code' => 'setZipCode'
+        'zip_code' => 'setZipCode',
+        'npis' => 'setNpis'
     );
 
     public static function setters()
@@ -349,7 +383,6 @@ class Provider implements ArrayAccess
         'middle_name' => 'getMiddleName',
         'network_ids' => 'getNetworkIds',
         'organization_name' => 'getOrganizationName',
-        'personal_phone' => 'getPersonalPhone',
         'phone' => 'getPhone',
         'presentation_name' => 'getPresentationName',
         'specialty' => 'getSpecialty',
@@ -360,7 +393,8 @@ class Provider implements ArrayAccess
         'suffix' => 'getSuffix',
         'title' => 'getTitle',
         'type' => 'getType',
-        'zip_code' => 'getZipCode'
+        'zip_code' => 'getZipCode',
+        'npis' => 'getNpis'
     );
 
     public static function getters()
@@ -395,7 +429,6 @@ class Provider implements ArrayAccess
         $this->container['middle_name'] = isset($data['middle_name']) ? $data['middle_name'] : null;
         $this->container['network_ids'] = isset($data['network_ids']) ? $data['network_ids'] : null;
         $this->container['organization_name'] = isset($data['organization_name']) ? $data['organization_name'] : null;
-        $this->container['personal_phone'] = isset($data['personal_phone']) ? $data['personal_phone'] : null;
         $this->container['phone'] = isset($data['phone']) ? $data['phone'] : null;
         $this->container['presentation_name'] = isset($data['presentation_name']) ? $data['presentation_name'] : null;
         $this->container['specialty'] = isset($data['specialty']) ? $data['specialty'] : null;
@@ -407,6 +440,7 @@ class Provider implements ArrayAccess
         $this->container['title'] = isset($data['title']) ? $data['title'] : null;
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         $this->container['zip_code'] = isset($data['zip_code']) ? $data['zip_code'] : null;
+        $this->container['npis'] = isset($data['npis']) ? $data['npis'] : null;
     }
 
     /**
@@ -664,27 +698,6 @@ class Provider implements ArrayAccess
     }
 
     /**
-     * Gets personal_phone
-     * @return string
-     */
-    public function getPersonalPhone()
-    {
-        return $this->container['personal_phone'];
-    }
-
-    /**
-     * Sets personal_phone
-     * @param string $personal_phone Personal contact phone for the provider.
-     * @return $this
-     */
-    public function setPersonalPhone($personal_phone)
-    {
-        $this->container['personal_phone'] = $personal_phone;
-
-        return $this;
-    }
-
-    /**
      * Gets phone
      * @return string
      */
@@ -911,6 +924,27 @@ class Provider implements ArrayAccess
     public function setZipCode($zip_code)
     {
         $this->container['zip_code'] = $zip_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets npis
+     * @return int[]
+     */
+    public function getNpis()
+    {
+        return $this->container['npis'];
+    }
+
+    /**
+     * Sets npis
+     * @param int[] $npis The National Provider Index (NPI) numbers associated with this provider.
+     * @return $this
+     */
+    public function setNpis($npis)
+    {
+        $this->container['npis'] = $npis;
 
         return $this;
     }

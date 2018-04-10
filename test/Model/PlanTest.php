@@ -109,7 +109,7 @@ document.
 In this case, we want to select `name` and `phone` from the `provider` key,
 so we would add the parameters `select=provider.name,provider.phone`.
 We also want the `name` and `code` from the `states` key, so we would
-add the parameters `select=states.name,staes.code`.  The id field of
+add the parameters `select=states.name,states.code`.  The id field of
 each document is always returned whether or not it is requested.
 
 Our final request would be `GET /providers/12345?select=provider.name,provider.phone,states.name,states.code`
@@ -164,19 +164,53 @@ In [this other Summary of Benefits &amp; Coverage](https://s3.amazonaws.com/veri
 Here's a description of the benefits summary string, represented as a context-free grammar:
 
 ```
-<cost-share>     ::= <tier> <opt-num-prefix> <value> <opt-per-unit> <deductible> <tier-limit> "/" <tier> <opt-num-prefix> <value> <opt-per-unit> <deductible> "|" <benefit-limit>
-<tier>           ::= "In-Network:" | "In-Network-Tier-2:" | "Out-of-Network:"
-<opt-num-prefix> ::= "first" <num> <unit> | ""
-<unit>           ::= "day(s)" | "visit(s)" | "exam(s)" | "item(s)"
-<value>          ::= <ddct_moop> | <copay> | <coinsurance> | <compound> | "unknown" | "Not Applicable"
-<compound>       ::= <copay> <deductible> "then" <coinsurance> <deductible> | <copay> <deductible> "then" <copay> <deductible> | <coinsurance> <deductible> "then" <coinsurance> <deductible>
-<copay>          ::= "$" <num>
-<coinsurace>     ::= <num> "%"
-<ddct_moop>      ::= <copay> | "Included in Medical" | "Unlimited"
-<opt-per-unit>   ::= "per day" | "per visit" | "per stay" | ""
-<deductible>     ::= "before deductible" | "after deductible" | ""
-<tier-limit>     ::= ", " <limit> | ""
-<benefit-limit>  ::= <limit> | ""
+root                      ::= coverage
+
+coverage                  ::= (simple_coverage | tiered_coverage) (space pipe space coverage_modifier)?
+tiered_coverage           ::= tier (space slash space tier)*
+tier                      ::= tier_name colon space (tier_coverage | not_applicable)
+tier_coverage             ::= simple_coverage (space (then | or | and) space simple_coverage)* tier_limitation?
+simple_coverage           ::= (pre_coverage_limitation space)? coverage_amount (space post_coverage_limitation)? (comma? space coverage_condition)?
+coverage_modifier         ::= limit_condition colon space (((simple_coverage | simple_limitation) (semicolon space see_carrier_documentation)?) | see_carrier_documentation | waived_if_admitted | shared_across_tiers)
+waived_if_admitted        ::= ("copay" space)? "waived if admitted"
+simple_limitation         ::= pre_coverage_limitation space "copay applies"
+tier_name                 ::= "In-Network-Tier-2" | "Out-of-Network" | "In-Network"
+limit_condition           ::= "limit" | "condition"
+tier_limitation           ::= comma space "up to" space (currency | (integer space time_unit plural?)) (space post_coverage_limitation)?
+coverage_amount           ::= currency | unlimited | included | unknown | percentage | (digits space (treatment_unit | time_unit) plural?)
+pre_coverage_limitation   ::= first space digits space time_unit plural?
+post_coverage_limitation  ::= (((then space currency) | "per condition") space)? "per" space (treatment_unit | (integer space time_unit) | time_unit) plural?
+coverage_condition        ::= ("before deductible" | "after deductible" | "penalty" | allowance | "in-state" | "out-of-state") (space allowance)?
+allowance                 ::= upto_allowance | after_allowance
+upto_allowance            ::= "up to" space (currency space)? "allowance"
+after_allowance           ::= "after" space (currency space)? "allowance"
+see_carrier_documentation ::= "see carrier documentation for more information"
+shared_across_tiers       ::= "shared across all tiers"
+unknown                   ::= "unknown"
+unlimited                 ::= /[uU]nlimited/
+included                  ::= /[iI]ncluded in [mM]edical/
+time_unit                 ::= /[hH]our/ | (((/[cC]alendar/ | /[cC]ontract/) space)? /[yY]ear/) | /[mM]onth/ | /[dD]ay/ | /[wW]eek/ | /[vV]isit/ | /[lL]ifetime/ | ((((/[bB]enefit/ plural?) | /[eE]ligibility/) space)? /[pP]eriod/)
+treatment_unit            ::= /[pP]erson/ | /[gG]roup/ | /[cC]ondition/ | /[sS]cript/ | /[vV]isit/ | /[eE]xam/ | /[iI]tem/ | /[sS]tay/ | /[tT]reatment/ | /[aA]dmission/ | /[eE]pisode/
+comma                     ::= ","
+colon                     ::= ":"
+semicolon                 ::= ";"
+pipe                      ::= "|"
+slash                     ::= "/"
+plural                    ::= "(s)" | "s"
+then                      ::= "then" | ("," space) | space
+or                        ::= "or"
+and                       ::= "and"
+not_applicable            ::= "Not Applicable" | "N/A" | "NA"
+first                     ::= "first"
+currency                  ::= "$" number
+percentage                ::= number "%"
+number                    ::= float | integer
+float                     ::= digits "." digits
+integer                   ::= /[0-9]/+ (comma_int | under_int)*
+comma_int                 ::= ("," /[0-9]/*3) !"_"
+under_int                 ::= ("_" /[0-9]/*3) !","
+digits                    ::= /[0-9]/+ ("_" /[0-9]/+)*
+space                     ::= /[ \t]/+
 ```
 
 
@@ -263,46 +297,6 @@ class PlanTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "adult_dental"
-     */
-    public function testPropertyAdultDental()
-    {
-
-    }
-
-    /**
-     * Test attribute "age29_rider"
-     */
-    public function testPropertyAge29Rider()
-    {
-
-    }
-
-    /**
-     * Test attribute "ambulance"
-     */
-    public function testPropertyAmbulance()
-    {
-
-    }
-
-    /**
-     * Test attribute "benefits_summary_url"
-     */
-    public function testPropertyBenefitsSummaryUrl()
-    {
-
-    }
-
-    /**
-     * Test attribute "buy_link"
-     */
-    public function testPropertyBuyLink()
-    {
-
-    }
-
-    /**
      * Test attribute "carrier_name"
      */
     public function testPropertyCarrierName()
@@ -311,73 +305,9 @@ class PlanTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "child_dental"
-     */
-    public function testPropertyChildDental()
-    {
-
-    }
-
-    /**
-     * Test attribute "child_eyewear"
-     */
-    public function testPropertyChildEyewear()
-    {
-
-    }
-
-    /**
-     * Test attribute "child_eye_exam"
-     */
-    public function testPropertyChildEyeExam()
-    {
-
-    }
-
-    /**
-     * Test attribute "customer_service_phone_number"
-     */
-    public function testPropertyCustomerServicePhoneNumber()
-    {
-
-    }
-
-    /**
-     * Test attribute "durable_medical_equipment"
-     */
-    public function testPropertyDurableMedicalEquipment()
-    {
-
-    }
-
-    /**
-     * Test attribute "diagnostic_test"
-     */
-    public function testPropertyDiagnosticTest()
-    {
-
-    }
-
-    /**
      * Test attribute "display_name"
      */
     public function testPropertyDisplayName()
-    {
-
-    }
-
-    /**
-     * Test attribute "dp_rider"
-     */
-    public function testPropertyDpRider()
-    {
-
-    }
-
-    /**
-     * Test attribute "drug_formulary_url"
-     */
-    public function testPropertyDrugFormularyUrl()
     {
 
     }
@@ -399,209 +329,9 @@ class PlanTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "emergency_room"
+     * Test attribute "identifiers"
      */
-    public function testPropertyEmergencyRoom()
-    {
-
-    }
-
-    /**
-     * Test attribute "family_drug_deductible"
-     */
-    public function testPropertyFamilyDrugDeductible()
-    {
-
-    }
-
-    /**
-     * Test attribute "family_drug_moop"
-     */
-    public function testPropertyFamilyDrugMoop()
-    {
-
-    }
-
-    /**
-     * Test attribute "family_medical_deductible"
-     */
-    public function testPropertyFamilyMedicalDeductible()
-    {
-
-    }
-
-    /**
-     * Test attribute "family_medical_moop"
-     */
-    public function testPropertyFamilyMedicalMoop()
-    {
-
-    }
-
-    /**
-     * Test attribute "fp_rider"
-     */
-    public function testPropertyFpRider()
-    {
-
-    }
-
-    /**
-     * Test attribute "generic_drugs"
-     */
-    public function testPropertyGenericDrugs()
-    {
-
-    }
-
-    /**
-     * Test attribute "habilitation_services"
-     */
-    public function testPropertyHabilitationServices()
-    {
-
-    }
-
-    /**
-     * Test attribute "hios_issuer_id"
-     */
-    public function testPropertyHiosIssuerId()
-    {
-
-    }
-
-    /**
-     * Test attribute "home_health_care"
-     */
-    public function testPropertyHomeHealthCare()
-    {
-
-    }
-
-    /**
-     * Test attribute "hospice_service"
-     */
-    public function testPropertyHospiceService()
-    {
-
-    }
-
-    /**
-     * Test attribute "hsa_eligible"
-     */
-    public function testPropertyHsaEligible()
-    {
-
-    }
-
-    /**
-     * Test attribute "id"
-     */
-    public function testPropertyId()
-    {
-
-    }
-
-    /**
-     * Test attribute "imaging"
-     */
-    public function testPropertyImaging()
-    {
-
-    }
-
-    /**
-     * Test attribute "in_network_ids"
-     */
-    public function testPropertyInNetworkIds()
-    {
-
-    }
-
-    /**
-     * Test attribute "individual_drug_deductible"
-     */
-    public function testPropertyIndividualDrugDeductible()
-    {
-
-    }
-
-    /**
-     * Test attribute "individual_drug_moop"
-     */
-    public function testPropertyIndividualDrugMoop()
-    {
-
-    }
-
-    /**
-     * Test attribute "individual_medical_deductible"
-     */
-    public function testPropertyIndividualMedicalDeductible()
-    {
-
-    }
-
-    /**
-     * Test attribute "individual_medical_moop"
-     */
-    public function testPropertyIndividualMedicalMoop()
-    {
-
-    }
-
-    /**
-     * Test attribute "inpatient_birth"
-     */
-    public function testPropertyInpatientBirth()
-    {
-
-    }
-
-    /**
-     * Test attribute "inpatient_facility"
-     */
-    public function testPropertyInpatientFacility()
-    {
-
-    }
-
-    /**
-     * Test attribute "inpatient_mental_health"
-     */
-    public function testPropertyInpatientMentalHealth()
-    {
-
-    }
-
-    /**
-     * Test attribute "inpatient_physician"
-     */
-    public function testPropertyInpatientPhysician()
-    {
-
-    }
-
-    /**
-     * Test attribute "inpatient_substance"
-     */
-    public function testPropertyInpatientSubstance()
-    {
-
-    }
-
-    /**
-     * Test attribute "level"
-     */
-    public function testPropertyLevel()
-    {
-
-    }
-
-    /**
-     * Test attribute "logo_url"
-     */
-    public function testPropertyLogoUrl()
+    public function testPropertyIdentifiers()
     {
 
     }
@@ -615,89 +345,17 @@ class PlanTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "network_ids"
+     */
+    public function testPropertyNetworkIds()
+    {
+
+    }
+
+    /**
      * Test attribute "network_size"
      */
     public function testPropertyNetworkSize()
-    {
-
-    }
-
-    /**
-     * Test attribute "non_preferred_brand_drugs"
-     */
-    public function testPropertyNonPreferredBrandDrugs()
-    {
-
-    }
-
-    /**
-     * Test attribute "on_market"
-     */
-    public function testPropertyOnMarket()
-    {
-
-    }
-
-    /**
-     * Test attribute "off_market"
-     */
-    public function testPropertyOffMarket()
-    {
-
-    }
-
-    /**
-     * Test attribute "out_of_network_coverage"
-     */
-    public function testPropertyOutOfNetworkCoverage()
-    {
-
-    }
-
-    /**
-     * Test attribute "out_of_network_ids"
-     */
-    public function testPropertyOutOfNetworkIds()
-    {
-
-    }
-
-    /**
-     * Test attribute "outpatient_facility"
-     */
-    public function testPropertyOutpatientFacility()
-    {
-
-    }
-
-    /**
-     * Test attribute "outpatient_mental_health"
-     */
-    public function testPropertyOutpatientMentalHealth()
-    {
-
-    }
-
-    /**
-     * Test attribute "outpatient_physician"
-     */
-    public function testPropertyOutpatientPhysician()
-    {
-
-    }
-
-    /**
-     * Test attribute "outpatient_substance"
-     */
-    public function testPropertyOutpatientSubstance()
-    {
-
-    }
-
-    /**
-     * Test attribute "plan_market"
-     */
-    public function testPropertyPlanMarket()
     {
 
     }
@@ -711,70 +369,6 @@ class PlanTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "preferred_brand_drugs"
-     */
-    public function testPropertyPreferredBrandDrugs()
-    {
-
-    }
-
-    /**
-     * Test attribute "prenatal_postnatal_care"
-     */
-    public function testPropertyPrenatalPostnatalCare()
-    {
-
-    }
-
-    /**
-     * Test attribute "preventative_care"
-     */
-    public function testPropertyPreventativeCare()
-    {
-
-    }
-
-    /**
-     * Test attribute "premium_subsidized"
-     */
-    public function testPropertyPremiumSubsidized()
-    {
-
-    }
-
-    /**
-     * Test attribute "premium"
-     */
-    public function testPropertyPremium()
-    {
-
-    }
-
-    /**
-     * Test attribute "premium_source"
-     */
-    public function testPropertyPremiumSource()
-    {
-
-    }
-
-    /**
-     * Test attribute "primary_care_physician"
-     */
-    public function testPropertyPrimaryCarePhysician()
-    {
-
-    }
-
-    /**
-     * Test attribute "rehabilitation_services"
-     */
-    public function testPropertyRehabilitationServices()
-    {
-
-    }
-
-    /**
      * Test attribute "service_area_id"
      */
     public function testPropertyServiceAreaId()
@@ -783,33 +377,9 @@ class PlanTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "skilled_nursing"
+     * Test attribute "source"
      */
-    public function testPropertySkilledNursing()
-    {
-
-    }
-
-    /**
-     * Test attribute "specialist"
-     */
-    public function testPropertySpecialist()
-    {
-
-    }
-
-    /**
-     * Test attribute "specialty_drugs"
-     */
-    public function testPropertySpecialtyDrugs()
-    {
-
-    }
-
-    /**
-     * Test attribute "urgent_care"
-     */
-    public function testPropertyUrgentCare()
+    public function testPropertySource()
     {
 
     }
