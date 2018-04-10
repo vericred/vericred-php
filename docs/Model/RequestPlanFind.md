@@ -4,9 +4,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **applicants** | [**\Swagger\Client\Model\RequestPlanFindApplicant[]**](RequestPlanFindApplicant.md) | Applicants for desired plans. | [optional] 
+**carrier_id** | **int** | National-level carrier id | [optional] 
 **enrollment_date** | **string** | Date of enrollment | [optional] 
 **drug_packages** | [**\Swagger\Client\Model\RequestPlanFindDrugPackage[]**](RequestPlanFindDrugPackage.md) | National Drug Code Package Id | [optional] 
 **fips_code** | **string** | County code to determine eligibility | [optional] 
+**group_name** | **string** | Label for search tracking | [optional] 
 **household_income** | **int** | Total household income. | [optional] 
 **household_size** | **int** | Number of people living in household. | [optional] 
 **ids** | **int[]** | List of plan IDs to filter by | [optional] 

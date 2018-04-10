@@ -5,10 +5,11 @@ All URIs are relative to *https://api.vericred.com/*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getZipCounties**](ZipCountiesApi.md#getZipCounties) | **GET** /zip_counties | Search for Zip Counties
+[**showZipCounty**](ZipCountiesApi.md#showZipCounty) | **GET** /zip_counties/{id} | Show an individual ZipCounty
 
 
 # **getZipCounties**
-> \Swagger\Client\Model\ZipCountyResponse getZipCounties($zip_prefix)
+> \Swagger\Client\Model\ZipCountiesResponse getZipCounties($zip_prefix)
 
 Search for Zip Counties
 
@@ -41,6 +42,56 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **zip_prefix** | **string**| Partial five-digit Zip |
+
+### Return type
+
+[**\Swagger\Client\Model\ZipCountiesResponse**](../Model/ZipCountiesResponse.md)
+
+### Authorization
+
+[Vericred-Api-Key](../../README.md#Vericred-Api-Key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **showZipCounty**
+> \Swagger\Client\Model\ZipCountyResponse showZipCounty($id)
+
+Show an individual ZipCounty
+
+Our `Plan` endpoints require a zip code and a fips (county) code.  This is because plan pricing requires both of these elements.  Users are unlikely to know their fips code, so we provide this endpoint to returns the details for a `ZipCounty` by zip code and return both the selected zip and fips codes.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: Vericred-Api-Key
+Vericred\Client\Configuration::getDefaultConfiguration()->setApiKey('Vericred-Api-Key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// Vericred\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('Vericred-Api-Key', 'Bearer');
+
+$api_instance = new Vericred\Client\Api\ZipCountiesApi();
+$id = 12345; // int | Unique ID for ZipCounty
+
+try {
+    $result = $api_instance->showZipCounty($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ZipCountiesApi->showZipCounty: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **int**| Unique ID for ZipCounty |
 
 ### Return type
 
